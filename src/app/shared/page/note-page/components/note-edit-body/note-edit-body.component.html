@@ -1,0 +1,17 @@
+<div class="editBodyWrapper">
+
+    <!-- <button class="noticeBtn" type="button" mat-raised-button matTooltip="ghim" mat-icon-button disableRipple=true
+        (click)="changePin()">
+        <mat-icon class="pinIco" [ngClass]="{'material-icons-outlined':!note.pin}">flag</mat-icon>
+    </button> -->
+    <div class="header">
+        <input type="text" class="title" placeholder="Tiêu đề" [(ngModel)]="note.title">
+    </div>
+
+    <div class="body">
+        <textarea placeholder="Tạo ghi chú" [(ngModel)]="note.description" class="description" cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1">
+        </textarea>
+        <!-- <app-note-labels [note]=note [shortMode]='false'></app-note-labels> -->
+    </div>
+</div>
