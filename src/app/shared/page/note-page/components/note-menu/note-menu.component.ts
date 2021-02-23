@@ -11,46 +11,46 @@ import { DialogueConfirmComponent } from '../dialogue-confirm/dialogue-confirm.c
   styleUrls: ['./note-menu.component.scss']
 })
 export class NoteMenuComponent implements OnInit {
-  @Input() note: Note;
-  @Input() newNote: boolean;
-  @Input() details: boolean;
-  public quantity:Number =0;
+  // @Input() note: Note;
+  // @Input() newNote: boolean;
+  // @Input() details: boolean;
+  // public quantity:Number =0;
 
-  Trash: Note[] = this.noteService.getNotes;
+  // Trash: Note[] = this.noteService.getNotes;
   constructor(private noteService: NoteService,
     // private labelService: LabelService,
-    public dialog: MatDialog,
+    // public dialog: MatDialog,
     // private snackBar: MatSnackBar
   ) { }
 
 
-  public onClickGetNum(){
-    // this.quantity = this.quantity+1;
-    // for()
-    // console.log(this.noteService.getNotes);
-  }
+  // public onClickGetNum(){
+  //   // this.quantity = this.quantity+1;
+  //   // for()
+  //   // console.log(this.noteService.getNotes);
+  // }
   ngOnInit(): void {
   }
-  // Delete or restore note
-  deleteConfirmDialogue(): void {
-    if (this.newNote) {
-      this.deleteNote();
-      console.log("Đã chuyển ghi chú vào thùng rác")
-    } else if (!this.note.trash) {
-      this.deleteNote();
-    } else {
-      this.deleteNote();
-    }
-    this.deleteNoteEmit();
-  }
+  // // Delete or restore note
+  // deleteConfirmDialogue(): void {
+  //   if (this.newNote) {
+  //     this.deleteNote();
+  //     console.log("Đã chuyển ghi chú vào thùng rác")
+  //   } else if (!this.note.trash) {
+  //     this.deleteNote();
+  //   } else {
+  //     this.deleteNote();
+  //   }
+  //   this.deleteNoteEmit();
+  // }
 
-  deleteNote() {
-    this.note.arhieved = false;
-    this.note.trash = !this.note.trash;
-  }
+  // deleteNote() {
+  //   this.note.arhieved = false;
+  //   this.note.trash = !this.note.trash;
+  // }
 
-  @Output() noteDelete = new EventEmitter<boolean>();
-  deleteNoteEmit() {
-    this.noteDelete.emit(true);
-  }
+  // @Output() noteDelete = new EventEmitter<boolean>();
+  // deleteNoteEmit() {
+  //   this.noteDelete.emit(true);
+  // }
 }

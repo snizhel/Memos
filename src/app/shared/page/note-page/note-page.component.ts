@@ -16,10 +16,17 @@ export class NotePageComponent implements OnInit {
 
   }
 
-  check() {
+  // check(numb) {
+  //   // console.log(numb);
+  //   // this.noteServcies.addToTrash(numb);
+  //   // this.noteServcies.getNotes();
+    
+  //   this.noteServcies.addToTrash(numb);
+
+  // }
+
+  checkArray(){
     console.log(this.noteServcies.getNotes);
-    // this.noteServcies.getNotes();
-    // console.log(this.noteService.getNotes());
   }
 
 }

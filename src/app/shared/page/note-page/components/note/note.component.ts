@@ -11,25 +11,16 @@ import { NoteService } from 'src/app/services/note.service';
 export class NoteComponent implements OnInit {
   @Input() note: Note;
   menuActiveTrigger:boolean = false;
-  constructor(private noteService: NoteService,
+ 
+  constructor(public noteServcies:NoteService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
   public vitri;
 
-  check(numb:Number){
-    console.log(numb);
+  public deleteNote(numb){
+    this.noteServcies.addToTrash(numb);
   }
-    // // Open modal note edit
-    // openDialog(note: any): void {
-    //   const dialogRef = this.dialog.open(EditNoteModalComponent, {
-    //     width: '600px',
-    //     data:note
-    //   });
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     if(!note.todoList.length) this.note.showTodo = false;
-    //   });
-    // }
 
 }

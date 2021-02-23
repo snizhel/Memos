@@ -13,5 +13,7 @@ export class NoteEditBodyComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  test(a){
+    console.log(a);
+  }
 }
