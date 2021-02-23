@@ -9,10 +9,12 @@ import { NumberValueAccessor } from '@angular/forms';
 export class NoteService {
   private notes: Note[];
   private trashs: Note[];
+  private archive: Note[];
   constructor() {
     // Program default notes
     this.notes = [];
     this.trashs = [];
+    this.archive = [];
   }
 
   // Example note
@@ -63,13 +65,27 @@ export class NoteService {
 
     this.trashs.push(this.notes[numb - 1]);
     this.notes.splice(numb - 1, 1);
-
-    console.log(this.trashs);
+  }
+  addNoteToArchive(numb: number) {
+    this.archive.push(this.notes[numb - 1]);
+    this.notes.splice(numb - 1, 1);
+    console.log(this.archive);
   }
 
+  deleteInTrash(numb: number) {
+    this.trashs.splice(numb - 1, 1);
+  }
+  deleteArchiveToTrash(numb: number) {
+    this.trashs.push(this.archive[numb - 1]);
+    this.archive.splice(numb - 1, 1);
+  }
 
   public get getNotes(): Note[] {
     return this.notes;
+  }
+
+  public get getArchive(): Note[] {
+    return this.archive;
   }
 
   // getTrash(){
