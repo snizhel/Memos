@@ -19,13 +19,15 @@
                 </div>
                 <app-note class="item" *ngFor="let note of notes" [notes]='notes'></app-note>
                <div *ngFor="let note of noteServcies.getNotes" [Notes]="note"></div> -->
-                
-                    <app-note></app-note>
+                <div style="border: black solid;width: 100%;height: auto;">
+                    <app-note-flag></app-note-flag>
+                </div>
+                <app-note></app-note>
 
             </div>
         </div>
     </div>
 
-    
+
 
 </div>

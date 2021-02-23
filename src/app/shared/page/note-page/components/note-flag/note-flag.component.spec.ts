@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoteMenuComponent } from './note-menu.component';
+import { NoteFlagComponent } from './note-flag.component';
 
-describe('NoteMenuComponent', () => {
-  let component: NoteMenuComponent;
-  let fixture: ComponentFixture<NoteMenuComponent>;
+describe('NoteFlagComponent', () => {
+  let component: NoteFlagComponent;
+  let fixture: ComponentFixture<NoteFlagComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NoteMenuComponent ]
+      declarations: [ NoteFlagComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NoteMenuComponent);
+    fixture = TestBed.createComponent(NoteFlagComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

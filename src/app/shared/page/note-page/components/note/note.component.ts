@@ -25,4 +25,9 @@ export class NoteComponent implements OnInit {
     this.noteServcies.addNoteToArchive(numb);
   }
 
+  public noteFlag(numb){
+    // console.log(numb);
+    this.noteServcies.addNoteToFlag(numb);
+  }
+
 }

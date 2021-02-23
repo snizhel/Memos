@@ -10,11 +10,14 @@ export class NoteService {
   private notes: Note[];
   private trashs: Note[];
   private archive: Note[];
+  private flag:Note[];
   constructor() {
     // Program default notes
     this.notes = [];
     this.trashs = [];
     this.archive = [];
+    this.flag = [this.getDefaultNote()];
+    // this.flag=[];
   }
 
   // Example note
@@ -47,29 +50,25 @@ export class NoteService {
   }
 
 
-  checkByNumb(numb: Number) {
-    // numb = parseInt(numb);
-    console.log(numb);
-    for (let i = 0; i < this.notes.length; i++) {
-      if (this.notes[i].num == numb) {
-
-        console.log(this.trashs);
-      }
-
-    }
-
-
-  }
-
   addToTrash(numb: number) {
-
     this.trashs.push(this.notes[numb - 1]);
     this.notes.splice(numb - 1, 1);
   }
   addNoteToArchive(numb: number) {
     this.archive.push(this.notes[numb - 1]);
     this.notes.splice(numb - 1, 1);
-    console.log(this.archive);
+  }
+
+  addFlagToNote(numb:number){
+    this.notes.push(this.flag[numb-1]);
+    this.flag.splice(numb - 1, 1);
+  }
+
+  addNoteToFlag(numb:number){
+    this.flag.push(this.notes[numb - 1]);
+    this.notes.splice(numb - 1, 1);
+    // console.log(this.flag);
+
   }
 
   deleteInTrash(numb: number) {
@@ -79,7 +78,9 @@ export class NoteService {
     this.trashs.push(this.archive[numb - 1]);
     this.archive.splice(numb - 1, 1);
   }
-
+  public get getFlag():Note[]{
+    return this.flag;
+  }
   public get getNotes(): Note[] {
     return this.notes;
   }
