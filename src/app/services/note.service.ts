@@ -13,7 +13,7 @@ export class NoteService {
   private flag:Note[];
   constructor() {
     // Program default notes
-    this.notes = [];
+    this.notes = [this.getDefaultNote()];
     this.trashs = [];
     this.archive = [];
     this.flag = [this.getDefaultNote()];
@@ -68,7 +68,16 @@ export class NoteService {
     this.flag.push(this.notes[numb - 1]);
     this.notes.splice(numb - 1, 1);
     // console.log(this.flag);
+  }
 
+  addFlagToArchive(numb:number){
+    this.archive.push(this.flag[numb - 1]);
+    this.flag.splice(numb - 1, 1);
+  }
+
+  addFlagToTrash(numb:number){
+    this.trashs.push(this.flag[numb - 1]);
+    this.flag.splice(numb - 1, 1);
   }
 
   deleteInTrash(numb: number) {

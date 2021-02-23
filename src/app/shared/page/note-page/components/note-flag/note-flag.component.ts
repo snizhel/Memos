@@ -18,9 +18,9 @@ export class NoteFlagComponent implements OnInit {
     this.noteServcies.addFlagToNote(numb);
   }
   public deleteNote(numb){
-
+    this.noteServcies.addFlagToTrash(numb);
   } 
   public storeNote(numb){
-
+    this.noteServcies.addFlagToArchive(numb);
   }
 }
