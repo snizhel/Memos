@@ -19,8 +19,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar'
 import { FormsModule } from '@angular/forms';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { NoteComponent } from './components/note/note.component';
+import { DialogueConfirmComponent } from './components/dialogue-confirm/dialogue-confirm.component';
 @NgModule({
-  declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent, NoteMenuComponent, NoteComponent],
+  declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent, NoteMenuComponent, NoteComponent, DialogueConfirmComponent],
   imports: [
     CommonModule,
     MatProgressBarModule,

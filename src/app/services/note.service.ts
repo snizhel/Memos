@@ -9,7 +9,7 @@ export class NoteService {
   private notes: Note[];
   constructor() {
     // Program default notes
-    this.notes = [this.getDefaultNote()];
+    this.notes = [];
 
   }
 
@@ -25,9 +25,11 @@ export class NoteService {
   getEmptyNote(): Note {
     return {
       id: uuid.v4(), title: "", description: "", labels: [], selectedColor: 0, pin: false,
-      color: '#fefefe', todoList: [], showTodo: false, arhieved: false, trash: false
+      color: '#fefefe', todoList: [], showTodo: false, arhieved: false, trash: false,num: this.notes.length+1
     }
   }
+
+
   // Note empty checking logic
   checkNoteIsEmpty(note: Note) {
     if (note.title || note.description || note.imagePreview ||
@@ -40,7 +42,12 @@ export class NoteService {
     this.notes.push(newNote);
   }
 
+
   public get getNotes():Note[]{
     return this.notes;
+  }
+
+  getTrash(){
+    return this.notes.filter( note => note.trash);
   }
 }

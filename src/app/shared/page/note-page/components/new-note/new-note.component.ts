@@ -11,6 +11,7 @@ import { NoteService } from 'src/app/services/note.service';
 export class NewNoteComponent implements OnInit {
   @Input() defaultAlarm: Date;
   @Input() defaultLabel: string;
+  @Input() numb:Number;
   openTrigger: boolean = false;
   newNote: Note;
   routeChanged: boolean = false;
@@ -97,6 +98,7 @@ isNoteEmpty(newNote: Note) {
 
 addNote() {
   this.noteService.addNote(this.newNote);
+  // console.log(this.newNote);
 }
 
 clear() {
@@ -109,6 +111,7 @@ generateEmptyNote(): Note {
   let newNote = this.noteService.getEmptyNote();
   if (this.defaultLabel) newNote.labels.push(this.defaultLabel);
   if (this.defaultAlarm) newNote.date = this.defaultAlarm;
+
   return newNote;
 }
 

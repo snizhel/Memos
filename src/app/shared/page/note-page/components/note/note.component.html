@@ -2,16 +2,32 @@
     <div class="item">
 
         <div class="item-content">
-        <div class="cardInfo">
+            <div class="cardInfo">
 
-            <h3 class="cardTitle">{{note.title}}</h3>
-            <p class="cardDescripion">{{note.description}}</p>
+                <h3 class="cardTitle">{{note.title}}</h3>
+                <p class="cardDescripion">{{note.description}}</p>
+                
+                <div class="noteMenuWrap">
 
-            <!-- <app-note-labels [note]=note [shortMode]='true'></app-note-labels> -->
+                    <div class="matMenuWrap labelMenuWrap" click-stop-propagation>
+
+                        <button mat-menu-item class="myMenuItem myMenuItemRiple">
+
+                            <span (click)="check(0)">button {{note.num}}</span>
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
+                    <!-- <app-note-menu [note]='note' [details]='true' (showNote)="openDialog(note)"
+                        (setMenu)="setMenuStatus($event)" (fileProgress)="setFileProgress($event)"></app-note-menu> -->
+                    <app-note-menu [note]='note' [details]='true'></app-note-menu>
+                </div>
+            </div>
 
         </div>
-
-    </div>
 
     </div>
 

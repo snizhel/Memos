@@ -11,6 +11,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component'
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     SearchBarComponent
   ],
   imports: [
+    MatDialogModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

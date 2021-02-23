@@ -2,6 +2,7 @@ import { Todo } from './todo-model';
 
 export class Note {
     id: string;
+    num?:Number;
     title?: string;
     description?: string;
     pin?: boolean;
