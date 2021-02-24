@@ -1,4 +1,22 @@
+<div class="trashPage">
+
+    <!-- <div class="noNotes" *ngIf="!getTrashNotes().length">
+        <mat-icon class="noNotesIco">delete_outline</mat-icon>
+        <span class="noNotesText">Delete outline</span>
+    </div> -->
+
+    <div class="gridHeader">
+        <h3 class="gridTitle">Ghi chú trong Thùng rác bị xóa sau 7 ngày</h3>
+        <!-- <h3 class="gridTitle">{{currentDate | date:'yyyy-MM-dd'}}</h3>  -->
+        <!-- <button>{{currentDate}}</button> -->
+        <button class="clearRef" (click)="deleteAll()">Clear all</button>
+    </div>
+
+</div>
+
 <div class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let i = index">
+
+
     <div class="item">
         <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(i+1,'trash')}">
             <div class="cardInfo">
