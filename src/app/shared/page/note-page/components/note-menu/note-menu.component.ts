@@ -51,7 +51,7 @@ export class NoteMenuComponent implements OnInit {
       // Load emulation
       setTimeout(() => {
         setFileProgress(false);
-      }, 3000);
+      }, 1000);
     };
 
     // Set file to note
