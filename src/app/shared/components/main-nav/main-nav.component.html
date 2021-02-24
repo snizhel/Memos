@@ -2,14 +2,19 @@
     <div class="logoWrap">
 
         <button class="sideNavBtn" type="button" aria-label="Toggle sidenav" mat-icon-button disableRipple=true
-        (click)="drawer.toggle()"
-        >
+            (click)="drawer.toggle()">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
         <span class="titleName">{{routeName}}</span>
     </div>
 
     <app-search-bar></app-search-bar>
+
+    <a class="Signin">
+        <mat-icon style="font-size: 36px; margin-right: 15px;">account_circle</mat-icon>
+
+        <a [routerLink]="['signin-page']"> Login </a>
+    </a>
 
 </mat-toolbar>
 
@@ -52,6 +57,7 @@
             </a>
 
         </mat-nav-list>
+
         <mat-sidenav-content class="menu-content">
 
             <!-- Content -->

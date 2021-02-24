@@ -15,6 +15,13 @@
     font-size: 18px;
 }
 
-.search button {
+.search button  {
     margin: 0 5px;
+    border: none;
+    outline: none;
+}
+.search button :hover { 
+    border: none;
+    background-color: lightgrey;
+    outline: none;
 }

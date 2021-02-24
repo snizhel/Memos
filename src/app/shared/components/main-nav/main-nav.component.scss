@@ -7,6 +7,13 @@
 
 .sideNavBtn {
     margin-left: 3px;
+    border:none;
+    outline: none;
+    background-color: transparent;
+    
+}
+.sideNavBtn:hover {
+    background: #efefef;
 }
 
 .titleName {
@@ -20,6 +27,7 @@
     /*height:100%;*/
     
     background: white;
+    
 }
 
 .sidenav {
@@ -106,4 +114,19 @@ mat-divider {
 .mat-sidenav-footer {
     width: 100%;
     height: 100px;
+}
+
+.Signin{
+    padding-left: 800px;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    font-size: 25px;
+} 
+
+.sidenav-container {
+    min-width: 200px !important;
+    width: 50vw !important;
+    max-width: 200px !important;
+    position:relative;
 }

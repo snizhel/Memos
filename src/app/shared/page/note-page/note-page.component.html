@@ -2,7 +2,6 @@
 
     <app-new-note></app-new-note>
 
-
     <button (click)="checkArray()">check item</button>
 
     <div class="grid" #gridLayout>
@@ -15,19 +14,22 @@
                 </div>
                  <div>
                     {{notes.title}}
-
                 </div>
+
                 <app-note class="item" *ngFor="let note of notes" [notes]='notes'></app-note>
                <div *ngFor="let note of noteServcies.getNotes" [Notes]="note"></div> -->
-                <div style="border: black solid;width: 100%;height: auto;">
+
+                <div class="dumadume">
                     <app-note-flag></app-note-flag>
                 </div>
                 <app-note></app-note>
 
+
+                <!-- <div class="parent">
+                    <app-note-flag></app-note-flag>
+                </div> -->
+
             </div>
         </div>
     </div>
-
-
-
 </div>

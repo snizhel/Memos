@@ -20,6 +20,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import { NoteComponent } from './components/note/note.component';
 import { DialogueConfirmComponent } from './components/dialogue-confirm/dialogue-confirm.component';
 import { NoteFlagComponent } from './components/note-flag/note-flag.component';
+
 @NgModule({
   declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent, NoteComponent, DialogueConfirmComponent, NoteFlagComponent],
   imports: [
@@ -39,4 +40,5 @@ import { NoteFlagComponent } from './components/note-flag/note-flag.component';
     FormsModule,
   ]
 })
+
 export class NotePageModule { }

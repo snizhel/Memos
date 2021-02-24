@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "memos"
+    }
+  },
+  "defaultProject": "memos",
+  "cli": {
+    "analytics": "9c8275db-106a-457f-825a-e5a6185a7ada"
+  }
 }
