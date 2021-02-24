@@ -92,8 +92,9 @@ mat-progress-bar {
 }
 
 .cardInfo .cardTitle {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-weight: 100;
-    font-size: 16px;
+    font-size: 20px;
     width: 100%;
     white-space: normal;
     word-wrap: break-word;
@@ -152,7 +153,6 @@ mat-progress-bar {
 .grid {
     position: relative;
     margin: 0px 52px;
-
 }
 .item {
     display: block;
@@ -325,13 +325,25 @@ mat-progress-bar {
 }
 
 .myMenuItemRiple:focus {
-    background: transparent;
+    // background: transparent;
 }
 
 .myMenuItemRiple:hover {
-    background: #f5f5f5;
+    // background: red;
+    // border: solid black;
+    // background-color: white;
+
+    // border-radius: 100%;
 }
 
 .matMenuFooter .closeBtn {
     margin-right: 10px;
+}
+
+.button{
+    // border-radius: 10%;
+}
+
+.material-icons-outlined{
+    // background-color: red;
 }
