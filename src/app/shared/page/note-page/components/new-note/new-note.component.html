@@ -1,5 +1,6 @@
-<div class="newNote" [ngStyle]="{background:newNote.color}" [class.opened]="openTrigger">
 
+<div class="newNote" [ngStyle]="{background:newNote.color}" [class.opened]="openTrigger">
+    
     <!-- Closed newNote element cap  !-->
     <div class="newNoteCap" *ngIf="!openTrigger">
         <input autofocus type="text" class="description" placeholder="Tạo ghi chú">
@@ -11,11 +12,7 @@
             <!-- <app-note-menu [note]='newNote' [newNote]='true' (noteDelete)="noteDeleted($event)"
                 (fileProgress)="setFileProgress($event)" (noteArhive)="noteArhived($event)"></app-note-menu> -->
 
-
             <a class="closeBtn" >close</a>
         </div>
-
     </div>
-
-
 </div>

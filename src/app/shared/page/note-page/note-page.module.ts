@@ -5,7 +5,6 @@ import { NotePageRoutingModule } from './note-page-routing.module';
 import { NotePageComponent } from './note-page.component';
 import { NewNoteComponent } from './components/new-note/new-note.component';
 import { NoteEditBodyComponent } from './components/note-edit-body/note-edit-body.component';
-import { NoteMenuComponent } from './components/note-menu/note-menu.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -20,8 +19,10 @@ import { FormsModule } from '@angular/forms';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { NoteComponent } from './components/note/note.component';
 import { DialogueConfirmComponent } from './components/dialogue-confirm/dialogue-confirm.component';
+import { NoteFlagComponent } from './components/note-flag/note-flag.component';
+
 @NgModule({
-  declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent, NoteMenuComponent, NoteComponent, DialogueConfirmComponent],
+  declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent, NoteComponent, DialogueConfirmComponent, NoteFlagComponent],
   imports: [
     CommonModule,
     MatProgressBarModule,
@@ -39,4 +40,5 @@ import { DialogueConfirmComponent } from './components/dialogue-confirm/dialogue
     FormsModule,
   ]
 })
+
 export class NotePageModule { }

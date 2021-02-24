@@ -1,17 +1,11 @@
-<div class="grid" #gridLayout *ngFor="let note of noteServcies.getNotes ;let i = index">
+<div class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let i = index">
     <div class="item">
         <div class="item-content">
             <div class="cardInfo">
-                <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="noteFlag(i+1)">
-                    <span>flag {{note.num}}</span>
-                </button>
                 <h3 class="cardTitle">{{note.title}}</h3>
                 <p class="cardDescripion">{{note.description}}</p>
                 <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(i+1)">
                     <span>Xóa {{note.num}}</span>
-                </button>
-                <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(i+1)">
-                    <span>Lưu</span>
                 </button>
                 <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
                     <!-- <app-note-menu [note]='note' [details]='true' (showNote)="openDialog(note)"
@@ -21,4 +15,6 @@
             </div>
         </div>
     </div>
+
+
 </div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NoteMenuComponent } from './note-menu.component';
+import { NoteTrashComponent } from './note-trash.component';
 
-describe('NoteMenuComponent', () => {
-  let component: NoteMenuComponent;
-  let fixture: ComponentFixture<NoteMenuComponent>;
+describe('NoteTrashComponent', () => {
+  let component: NoteTrashComponent;
+  let fixture: ComponentFixture<NoteTrashComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NoteMenuComponent ]
+      declarations: [ NoteTrashComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NoteMenuComponent);
+    fixture = TestBed.createComponent(NoteTrashComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

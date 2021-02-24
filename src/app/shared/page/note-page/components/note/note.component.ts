@@ -17,10 +17,17 @@ export class NoteComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  public vitri;
-
   public deleteNote(numb){
     this.noteServcies.addToTrash(numb);
+  }
+
+  public storeNote(numb){
+    this.noteServcies.addNoteToArchive(numb);
+  }
+
+  public noteFlag(numb){
+    // console.log(numb);
+    this.noteServcies.addNoteToFlag(numb);
   }
 
 }
