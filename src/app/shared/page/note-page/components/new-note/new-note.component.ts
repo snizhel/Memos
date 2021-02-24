@@ -116,19 +116,9 @@ export class NewNoteComponent implements OnInit {
     return newNote;
   }
 
-  // // Input file loading event handler, shows progress bar
-  // setFileProgress(fileProgress: boolean) {
-  //   this.fileProgress = fileProgress;
-  // }
-
-  // // Delete/arhive note event handlers
-  // noteDeleted($event) {
-  //   this.closePanel();
-  // }
-  // noteArhived($event) {
-  //   this.closePanel();
-  // }
-
-
-
+  // Input file loading event handler, shows progress bar
+  setFileProgress(fileProgress: boolean) {
+    this.fileProgress = fileProgress;
+  }
+  
 }

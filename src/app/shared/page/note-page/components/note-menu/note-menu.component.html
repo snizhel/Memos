@@ -1,0 +1,7 @@
+<input type="file" class="fileInput" (change)="onFileUpload($event)" accept=".png, .jpg, .jpeg" #fileInput>
+<div class="noteMenuWrap">
+    <button  type="button" mat-raised-button matTooltip="Thêm ảnh" mat-icon-button disableRipple=true
+        (click)="fileInput.click()">
+        <mat-icon class="material-icons-outlined" >insert_photo_outlined</mat-icon>
+    </button>
+</div>
