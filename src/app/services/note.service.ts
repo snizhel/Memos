@@ -35,10 +35,10 @@ export class NoteService {
   constructor() {
     // Program default notes
     // this.notes = [this.getDefaultNote()];
-    this.notes = [this.getDefaultNote()];
+    this.notes = [];
     this.trashs = [];
     this.archive = [];
-    this.flag = [this.getDefaultNote()];
+    this.flag = [];
     // this.flag=[];
   }
 
@@ -89,7 +89,6 @@ export class NoteService {
   addNoteToFlag(numb: number) {
     this.flag.push(this.notes[numb - 1]);
     this.notes.splice(numb - 1, 1);
-    // console.log(this.flag);
   }
 
   addFlagToArchive(numb: number) {
@@ -129,6 +128,8 @@ export class NoteService {
       this.flag[numb - 1].color = color;
     } else if (page == 'note') {
       this.notes[numb - 1].color = color;
+    }else if (page =='archive'){
+      this.archive[numb - 1].color = color;
     }
 
   }
@@ -142,13 +143,16 @@ export class NoteService {
   }
 
   public getColorByNum(num: number, page: string) {
-    if (page == 'note') return this.notes[num - 1].color;
-    else if (page == 'flag') return this.flag[num - 1].color;
-    else if (page == 'trash') return this.trashs[num - 1].color;
-    else if (page == 'archive') return this.archive[num - 1].color;
+    if (page == 'note') {return this.notes[num - 1].color;}
+    else if (page == 'flag'){ return this.flag[num - 1].color;}
+    else if (page == 'trash'){return this.trashs[num - 1].color;} 
+  }
+  public getColorByNumArchive (num: number, page: string) {
+    if (page == 'archive') {return this.archive[num - 1].color;}
+
 
   }
-
+  
 
   // Swaps notes
   changingNotes(oldNote: Note, newNote: Note) {
