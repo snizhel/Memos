@@ -7,10 +7,10 @@
 
     <div class="newNoteWrapper" *ngIf="openTrigger">
         <app-note-edit-body [note]=newNote [fileProgress]=fileProgress></app-note-edit-body>
-        <!-- <div [note]=newNote ></div> -->
         <div class="footer">
-            <!-- <app-note-menu [note]='newNote' [newNote]='true' (noteDelete)="noteDeleted($event)"
-                (fileProgress)="setFileProgress($event)" (noteArhive)="noteArhived($event)"></app-note-menu> -->
+
+            <app-note-menu [note]='newNote' [newNote]='true' (fileProgress)="setFileProgress($event)"></app-note-menu>
+
             <a class="closeBtn">close</a>
         </div>
     </div>
