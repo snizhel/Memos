@@ -8,6 +8,12 @@
                     <mat-icon>turned_in</mat-icon>
                 </button>
 
+                <div class="cardImage">
+                    <img draggable="false" *ngIf="note.imagePreview" [ngClass]={imageLoading:fileProgress}
+                        [src]="note.imagePreview">
+                    <mat-progress-bar *ngIf="fileProgress" mode="query"></mat-progress-bar>
+                </div>
+                
                 <h3 class="cardTitle">{{note.title}}</h3>
                 <p class="cardDescripion">{{note.description}}</p>
                 <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">

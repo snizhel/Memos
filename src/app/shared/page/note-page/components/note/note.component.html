@@ -1,49 +1,63 @@
 <div class="grid" #gridLayout *ngFor="let note of noteServcies.getNotes ;let j= index">
     <div class="item">
         <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'note')}">
-            <div class="cardInfo">
-                <button mat-menu-item class="myMenuItemRiple"
-                    [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'note')}"
-                    (click)="noteFlag(j+1)">
-                    <mat-icon>turned_in_not</mat-icon>
-                </button>
+            <div class="noteItem unselectable" (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)">
 
-                <h3 class="cardTitle">{{note.title}}</h3>
-                <p class="cardDescripion">{{note.description}}</p>
+                <div class="cardInfo">
+                    <button mat-menu-item class="myMenuItemRiple"
+                        [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'note')}"
+                        (click)="noteFlag(j+1)">
+                        <mat-icon>turned_in_not</mat-icon>
+                    </button>
 
-                
-                <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
+                    <div class="cardImage">
+                        <img draggable="false" *ngIf="note.imagePreview" [ngClass]={imageLoading:fileProgress}
+                            [src]="note.imagePreview">
+                        <mat-progress-bar *ngIf="fileProgress" mode="query"></mat-progress-bar>
+                    </div>
+                    <h3 class="cardTitle">{{note.title}}</h3>
+                    <p class="cardDescripion">{{note.description}}</p>
 
-                    <div class="noteMenuWrap">
 
+                    <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
 
+                        <div class="noteMenuWrap">
 
-                        <button mat-menu-item class="myMenuItem myMenuItemRiple" type="button" mat-raised-button
-                            matTooltip="Đổi màu" mat-icon-button disableRipple=true, [matMenuTriggerFor]="colorMenu"
-                            (menuClosed)="setMenuStatus(false)" (menuOpened)="setMenuStatus(true)">
-                            <mat-icon class="material-icons-outlined">color_lens_outlined</mat-icon>
-                        </button>
-                        <mat-menu #colorMenu="matMenu">
-                            <div class="matMenuWrap" click-stop-propagation>
+                            <button mat-menu-item class="myMenuItem myMenuItemRiple" type="button" mat-raised-button
+                                matTooltip="Đổi màu" mat-icon-button disableRipple=true, [matMenuTriggerFor]="colorMenu"
+                                (menuClosed)="setMenuStatus(false)" (menuOpened)="setMenuStatus(true)">
+                                <mat-icon class="material-icons-outlined">color_lens_outlined</mat-icon>
+                            </button>
+                            <mat-menu #colorMenu="matMenu">
+                                <div class="matMenuWrap" click-stop-propagation>
 
-                                <div class="colorsWrap">
+                                    <div class="colorsWrap">
 
-                                    <div class="colorBtn" *ngFor="let color of this.noteServcies.colors; let i = index;"
-                                        [ngStyle]="{'background-color':color}" (click)="colorClick(i,j+1)">
+                                        <div class="colorBtn"
+                                            *ngFor="let color of this.noteServcies.colors; let i = index;"
+                                            [ngStyle]="{'background-color':color}" (click)="colorClick(i,j+1)">
+
+                                        </div>
 
                                     </div>
 
                                 </div>
+                            </mat-menu>
+                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(j+1)">
+                                <mat-icon>archive</mat-icon>
+                            </button>
+                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(j+1)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <app-note-menu  [note]='note' [details]='true' (showNote)="openDialog(note)"
+                                (setMenu)="setMenuStatus($event)" (fileProgress)="setFileProgress($event)">
+                            </app-note-menu>
+                        </div>
 
-                            </div>
-                        </mat-menu>
-                        <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(j+1)">
-                            <mat-icon>archive</mat-icon>
-                        </button>
-                        <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(j+1)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+
                     </div>
+
+
                 </div>
             </div>
         </div>
