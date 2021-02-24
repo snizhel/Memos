@@ -35,10 +35,10 @@ export class NoteService {
   constructor() {
     // Program default notes
     // this.notes = [this.getDefaultNote()];
-    this.notes = [];
-    this.trashs = [];
-    this.archive = [];
-    this.flag = [];
+    this.notes = [this.getDefaultNote(),this.getDefaultNote(),this.getDefaultNote()];
+    this.trashs = [this.getDefaultNote(),this.getDefaultNote(),this.getDefaultNote()];
+    this.archive = [this.getDefaultNote(),this.getDefaultNote(),this.getDefaultNote()];
+    this.flag = [this.getDefaultNote(),this.getDefaultNote(),this.getDefaultNote()];
     // this.flag=[];
   }
 
