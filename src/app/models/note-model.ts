@@ -6,6 +6,7 @@ export class Note {
     title?: string;
     description?: string;
     pin?: boolean;
+    
     labels?: string[];
     date?: Date;
     time?: string;

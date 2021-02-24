@@ -1,6 +1,6 @@
 <div class="grid" #gridLayout  *ngFor="let note of noteServcies.getArchive ;let i = index">
     <div class="item">
-        <div class="item-content">
+        <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(i+1,'archive')}">
             <div class="cardInfo">
                 <h3 class="cardTitle">{{note.title}}</h3>
                 <p class="cardDescripion">{{note.description}}</p>
