@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Note } from '../models/note-model';
 import * as uuid from 'uuid';
-import { NumberValueAccessor } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +10,12 @@ export class NoteService {
   private trashs: Note[];
   private archive: Note[];
   private flag: Note[];
+
+  days = 7;
+  date = new Date();
+  currentDate = new Date();
+  res = this.date.setTime(this.date.getTime() + (this.days * 24 * 60 * 60 * 1000));
+
   colors: string[] = [
     // Available menu colors
     "#fefefe",
@@ -30,7 +35,7 @@ export class NoteService {
   constructor() {
     // Program default notes
     // this.notes = [this.getDefaultNote()];
-    this.notes = [];
+    this.notes = [this.getDefaultNote()];
     this.trashs = [];
     this.archive = [];
     this.flag = [this.getDefaultNote()];
@@ -119,20 +124,29 @@ export class NoteService {
     return this.trashs;
   }
 
-  public changColor(color, numb,page) {
-    if(page=='flag'){
+  public changColor(color, numb, page) {
+    if (page == 'flag') {
       this.flag[numb - 1].color = color;
-    }else if(page == 'note'){
+    } else if (page == 'note') {
       this.notes[numb - 1].color = color;
     }
 
   }
+  public deteleAllOnDays() {
+    let current =this.currentDate.getTime();
+    if(current == this.res) this.trashs = [];
+  }
+
+  public deleteAll() {
+    this.trashs = [];
+  }
+
   public getColorByNum(num: number, page: string) {
     if (page == 'note') return this.notes[num - 1].color;
     else if (page == 'flag') return this.flag[num - 1].color;
-    else if (page == 'trash') return this.trashs[num-1].color;
-    else if (page == 'archive') return this.archive[num-1].color;
-    
+    else if (page == 'trash') return this.trashs[num - 1].color;
+    else if (page == 'archive') return this.archive[num - 1].color;
+
   }
 
 
