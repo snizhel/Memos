@@ -10,24 +10,46 @@ import { NoteService } from 'src/app/services/note.service';
 })
 export class NoteComponent implements OnInit {
   @Input() note: Note;
-  menuActiveTrigger:boolean = false;
- 
-  constructor(public noteServcies:NoteService,
+  menuActiveTrigger: boolean = false;
+  public color=this.noteServcies.colors;
+
+
+
+  constructor(public noteServcies: NoteService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-  public deleteNote(numb){
+  public deleteNote(numb) {
     this.noteServcies.addToTrash(numb);
   }
 
-  public storeNote(numb){
+  public storeNote(numb) {
     this.noteServcies.addNoteToArchive(numb);
   }
 
-  public noteFlag(numb){
+  public noteFlag(numb) {
     // console.log(numb);
     this.noteServcies.addNoteToFlag(numb);
+  }
+
+  // Check current color is selected
+  isSelect(index: number): boolean {
+    return this.note.selectedColor == index;
+  }
+  // Color menu item click event handler
+  colorClick(index: number,numb:number) {
+    this.noteServcies.changColor(this.color[index],numb,'note');
+  }
+
+  // getColor(index: number): string {
+  //   return this.colors[index];
+  // }
+
+  // Outputing menu opened trigger
+  @Output() setMenu = new EventEmitter<boolean>();
+  setMenuStatus(status: boolean) {
+    this.setMenu.emit(status);
   }
 
 }

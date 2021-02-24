@@ -10,10 +10,27 @@ export class NoteService {
   private notes: Note[];
   private trashs: Note[];
   private archive: Note[];
-  private flag:Note[];
+  private flag: Note[];
+  colors: string[] = [
+    // Available menu colors
+    "#fefefe",
+    "#f28c80",
+    "#f6bf02",
+    "#fff478",
+    "#cdfe91",
+    "#a6fdea",
+    "#cdeff8",
+    "#afcbfa",
+    "#d5affc",
+    "#fdcfe9",
+    "#e2cba9",
+    "#e9eaee",
+  ];
+
   constructor() {
     // Program default notes
-    this.notes = [this.getDefaultNote()];
+    // this.notes = [this.getDefaultNote()];
+    this.notes = [];
     this.trashs = [];
     this.archive = [];
     this.flag = [this.getDefaultNote()];
@@ -25,7 +42,7 @@ export class NoteService {
     return {
       id: uuid.v4(), title: 'firsttitle', description: 'firstdescription', pin: false,
       labels: [], selectedColor: 0, color: '#fefefe', todoList: [],
-      showTodo: false, arhieved: false, trash: false
+      showTodo: false, arhieved: false, trash: false,
     };
   }
   // Generate emptyNote
@@ -59,23 +76,23 @@ export class NoteService {
     this.notes.splice(numb - 1, 1);
   }
 
-  addFlagToNote(numb:number){
-    this.notes.push(this.flag[numb-1]);
+  addFlagToNote(numb: number) {
+    this.notes.push(this.flag[numb - 1]);
     this.flag.splice(numb - 1, 1);
   }
 
-  addNoteToFlag(numb:number){
+  addNoteToFlag(numb: number) {
     this.flag.push(this.notes[numb - 1]);
     this.notes.splice(numb - 1, 1);
     // console.log(this.flag);
   }
 
-  addFlagToArchive(numb:number){
+  addFlagToArchive(numb: number) {
     this.archive.push(this.flag[numb - 1]);
     this.flag.splice(numb - 1, 1);
   }
 
-  addFlagToTrash(numb:number){
+  addFlagToTrash(numb: number) {
     this.trashs.push(this.flag[numb - 1]);
     this.flag.splice(numb - 1, 1);
   }
@@ -87,7 +104,7 @@ export class NoteService {
     this.trashs.push(this.archive[numb - 1]);
     this.archive.splice(numb - 1, 1);
   }
-  public get getFlag():Note[]{
+  public get getFlag(): Note[] {
     return this.flag;
   }
   public get getNotes(): Note[] {
@@ -98,10 +115,31 @@ export class NoteService {
     return this.archive;
   }
 
-  // getTrash(){
-  //   return this.notes.filter( note => note.trash);
-  // }
   public get getTrash(): Note[] {
     return this.trashs;
+  }
+
+  public changColor(color, numb,page) {
+    if(page=='flag'){
+      this.flag[numb - 1].color = color;
+    }else if(page == 'note'){
+      this.notes[numb - 1].color = color;
+    }
+
+  }
+  public getColorByNum(num: number, page: string) {
+    if (page == 'note') return this.notes[num - 1].color;
+    else if (page == 'flag') return this.flag[num - 1].color;
+    else if (page == 'trash') return this.trashs[num-1].color;
+    else if (page == 'archive') return this.archive[num-1].color;
+    
+  }
+
+
+  // Swaps notes
+  changingNotes(oldNote: Note, newNote: Note) {
+    let oldIndex = this.notes.findIndex(elem => elem == oldNote);
+    let newIndex = this.notes.findIndex(elem => elem == newNote);
+    [this.notes[oldIndex], this.notes[newIndex]] = [this.notes[newIndex], this.notes[oldIndex]]
   }
 }
