@@ -26,7 +26,7 @@
 
 </div> -->
 
-<div class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let j = index">
+<div style="float: left;" class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let j = index">
     <div class="item">
         <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'trash')}">
             <div class="cardInfo">
