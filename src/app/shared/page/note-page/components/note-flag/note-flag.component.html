@@ -39,10 +39,9 @@
                         <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(j+1)">
                             <mat-icon>archive</mat-icon>
                         </button>
-                        <!-- Insert picture -->
-                        <app-note-menu class="myMenuItem myMenuItemRiple" style="margin-top: 2px; margin-left: 5px;" [note]='note' (fileProgress)="setFileProgress($event)">
+
+                        <app-note-menu [note]='note' (fileProgress)="setFileProgress($event)">
                         </app-note-menu>
-                        <!-- Delete -->
                         <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(j+1)">
                             <mat-icon>delete</mat-icon>
                         </button>

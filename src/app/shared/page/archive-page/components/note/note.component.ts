@@ -12,6 +12,11 @@ export class NoteComponent implements OnInit {
   constructor(public noteServcies: NoteService) { }
   @Input() note: Note;
   menuActiveTrigger: boolean = false;
+  fileProgress: boolean = false;
+  @Input() details: boolean; // means that menu not in noteComponent
+  @Input() newNote: boolean; // means that menu in newPageComponent
+  selecetdFile: File;
+  menuActive: boolean = false; // means that one of menu item open
   public color=this.noteServcies.colors;
   ngOnInit(): void {
   }
@@ -24,6 +29,9 @@ export class NoteComponent implements OnInit {
   // public storeNote(numb) {
   //   this.noteServcies.addFlagToArchive(numb);
   // }
+  setFileProgress(fileProgress: boolean) {
+    this.fileProgress = fileProgress;
+  }
 
     // Check current color is selected
     isSelect(index: number): boolean {
@@ -36,10 +44,8 @@ export class NoteComponent implements OnInit {
       this.noteServcies.changColor(this.color[index],numb,'archive')
     }
   
-    // getColor(index: number): string {
-    //   return this.colors[index];
-    // }
   
+
     // Outputing menu opened trigger
     @Output() setMenu = new EventEmitter<boolean>();
     setMenuStatus(status: boolean) {
