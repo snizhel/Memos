@@ -1,20 +1,12 @@
 <div class="trashPage">
-
-    <!-- <div class="noNotes" *ngIf="!getTrashNotes().length">
-        <mat-icon class="noNotesIco">delete_outline</mat-icon>
-        <span class="noNotesText">Delete outline</span>
-    </div> -->
-
     <div class="gridHeader">
-        <h3 class="gridTitle">Ghi chú trong Thùng rác bị xóa sau 7 ngày</h3>
-        <!-- <h3 class="gridTitle">{{currentDate | date:'yyyy-MM-dd'}}</h3>  -->
-        <!-- <button>{{currentDate}}</button> -->
-        <button class="clearRef" (click)="deleteAll()">Clear all</button>
+        <h3 class="gridTitle">Ghi chú trong Thùng rác bị xóa sau 7 ngày.</h3>
+        <button style="font-style: italic;" class="clearRef" (click)="deleteAll()">Clear all</button>
     </div>
 
 </div>
 
-<div class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let i = index">
+<!-- <div class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let i = index">
 
 
     <div class="item">
@@ -26,13 +18,37 @@
                     <span>Xóa {{note.num}}</span>
                 </button>
                 <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
-                    <!-- <app-note-menu [note]='note' [details]='true' (showNote)="openDialog(note)"
-                        (setMenu)="setMenuStatus($event)" (fileProgress)="setFileProgress($event)"></app-note-menu>
-                    <app-note-menu [note]='note' [details]='true'></app-note-menu> -->
                 </div>
             </div>
         </div>
     </div>
 
 
+</div> -->
+
+<div style="float: left; margin:0px 0px;" class="grid" #gridLayout
+    *ngFor="let note of noteServcies.getTrash ;let j = index">
+    <div class="item">
+        <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'trash')}">
+            <div class="cardInfo">
+
+                <div class="cardImage">
+                    <img [src]="note.imagePreview">
+                </div>
+
+                <h3 class="cardTitle">{{note.title}}</h3>
+                <p class="cardDescripion">{{note.description}}</p>
+                <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
+
+                    <div class="noteMenuWrap">
+                        <button style="padding: 5px 0px; width: 100%;" mat-menu-item class="myMenuItem myMenuItemRiple"
+                            (click)="deleteNote(j+1)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

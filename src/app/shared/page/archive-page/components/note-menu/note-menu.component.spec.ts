@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewNoteComponent } from './new-note.component';
+import { NoteMenuComponent } from './note-menu.component';
 
-describe('NewNoteComponent', () => {
-  let component: NewNoteComponent;
-  let fixture: ComponentFixture<NewNoteComponent>;
+describe('NoteMenuComponent', () => {
+  let component: NoteMenuComponent;
+  let fixture: ComponentFixture<NoteMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewNoteComponent ]
+      declarations: [ NoteMenuComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewNoteComponent);
+    fixture = TestBed.createComponent(NoteMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
