@@ -22,34 +22,29 @@
                             (menuClosed)="setMenuStatus(false)" (menuOpened)="setMenuStatus(true)">
                             <mat-icon class="material-icons-outlined">color_lens_outlined</mat-icon>
                         </button>
+
+                        <!-- Color change -->
                         <mat-menu #colorMenu="matMenu">
                             <div class="matMenuWrap" click-stop-propagation>
-
                                 <div class="colorsWrap">
-
                                     <div class="colorBtn" *ngFor="let color of this.noteServcies.colors; let i = index;"
                                         [ngStyle]="{'background-color':color}" (click)="colorClick(i,j+1,'flag')">
 
                                     </div>
-
-
                                 </div>
-
-
-
                             </div>
                         </mat-menu>
 
+                        <!-- Save -->
                         <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(j+1)">
                             <mat-icon>archive</mat-icon>
                         </button>
+
                         <app-note-menu [note]='note' (fileProgress)="setFileProgress($event)">
                         </app-note-menu>
                         <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(j+1)">
                             <mat-icon>delete</mat-icon>
                         </button>
-
-
 
                     </div>
                 </div>
