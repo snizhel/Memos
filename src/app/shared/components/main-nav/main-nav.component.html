@@ -1,3 +1,4 @@
+<!-- NAV BAR HERE! -->
 <mat-toolbar class="mytoolbar">
     <div class="logoWrap">
 
@@ -5,7 +6,7 @@
             (click)="drawer.toggle()">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span class="titleName">{{routeName}}</span>
+        <a [routerLink]="['note-page']" class="titleName">{{routeName}}</a>
     </div>
 
     <app-search-bar></app-search-bar>
@@ -13,11 +14,13 @@
     <a class="Signin">
         <mat-icon style="font-size: 36px; margin-right: 15px;">account_circle</mat-icon>
 
-        <a [routerLink]="['signin-page']"> Login </a>
+        <a class="loginIn" [routerLink]="['signin-page']"> Sign in </a>
     </a>
-
 </mat-toolbar>
 
+
+
+<!-- SIDE BAR HERE! -->
 <mat-sidenav-container class="sidenav-container" [hasBackdrop]=false [autosize]="true">
 
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true" fixedTopGap="70"
