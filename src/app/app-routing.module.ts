@@ -7,10 +7,12 @@ const routes: Routes = [
   { path: 'trash-page', loadChildren: () => import('./shared/page/trash-page/trash-page.module').then(m => m.TrashPageModule) },
   { path: 'signin-page', loadChildren: () => import('./shared/page/signin-page/signin-page.module').then(m => m.SigninPageModule) },
   { path: 'register-page', loadChildren: () => import('./shared/page/register-page/register-page.module').then(m => m.RegisterPageModule) },
-  { path: 'archive-page', loadChildren: () => import('./shared/page/archive-page/archive-page.module').then(m => m.ArchivePageModule) }];
+  { path: 'archive-page', loadChildren: () => import('./shared/page/archive-page/archive-page.module').then(m => m.ArchivePageModule) },
+]
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
+
+  @NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+  })
 export class AppRoutingModule { }

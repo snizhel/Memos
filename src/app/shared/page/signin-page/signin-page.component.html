@@ -1,7 +1,9 @@
 <div class="login-page">
     <div class="form">
         <form>
-
+            <img    [src]="user.photoURL">
+            <h1>{{user.displayName}}</h1>
+            <h2>{{user.email}}</h2>
             <h1 id="title">Sign in</h1>
             <br>
             <input type="text" placeholder="Username" required />
@@ -11,6 +13,7 @@
             <p class="message">Not registered? <a href="register-page"> Create an account</a></p>
             <p>or</p>
             <button (click)="login()">Login with Google</button>
+         <button (click)="signOut()">signout</button>
 
         </form>
     </div>
