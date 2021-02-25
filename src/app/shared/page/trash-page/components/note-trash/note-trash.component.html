@@ -1,14 +1,11 @@
 <div class="trashPage">
     <div class="gridHeader">
         <h3 class="gridTitle">Ghi chú trong Thùng rác bị xóa sau 7 ngày.</h3>
-        <button style="font-style: italic;" class="clearRef" (click)="deleteAll()">Clear all</button>
+        <button class="clearRef" (click)="deleteAll()">Dọn sạch thùng rác.</button>
     </div>
-
 </div>
 
 <!-- <div class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let i = index">
-
-
     <div class="item">
         <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(i+1,'trash')}">
             <div class="cardInfo">
@@ -22,8 +19,6 @@
             </div>
         </div>
     </div>
-
-
 </div> -->
 
 <div style="float: left; margin:0px 0px;" class="grid" #gridLayout
@@ -45,7 +40,6 @@
                             (click)="deleteNote(j+1)">
                             <mat-icon>delete</mat-icon>
                         </button>
-
                     </div>
                 </div>
             </div>
