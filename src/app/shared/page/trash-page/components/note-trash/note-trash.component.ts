@@ -9,17 +9,17 @@ import { NoteService } from 'src/app/services/note.service';
 })
 export class NoteTrashComponent implements OnInit {
   @Input() note: Note;
-  menuActiveTrigger:boolean = false;
-  
-  constructor(public noteServcies:NoteService) { }
+  menuActiveTrigger: boolean = false;
+
+  constructor(public noteServcies: NoteService) { }
 
   ngOnInit(): void {
-   
+
   }
-  deleteNote(numb){
+  deleteNote(numb) {
     this.noteServcies.deleteInTrash(numb);
   }
-  deleteAll(){
+  deleteAll() {
     this.noteServcies.deleteAll();
   }
 }
