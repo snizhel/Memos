@@ -5,6 +5,7 @@
             <div class="cardInfo">
                 <div class="cardImage">
                     <img [src]="note.imagePreview">
+                    <mat-progress-bar *ngIf="fileProgress" mode="query"></mat-progress-bar>
                 </div>
                 <h3 class="cardTitle">{{note.title}}</h3>
                 <p class="cardDescripion">{{note.description}}</p>
@@ -33,10 +34,12 @@
                             </div>
                         </mat-menu>
 
+                        
                         <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(j+1)">
                             <mat-icon>delete</mat-icon>
                         </button>
-
+                        <app-note-menu [note]='note' (fileProgress)="setFileProgress($event)">
+                        </app-note-menu>
 
                     </div>
                 </div>
