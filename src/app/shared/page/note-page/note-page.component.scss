@@ -3,12 +3,18 @@
     margin-left:280px;
 }
 
-.dumadume {
+.idkwhatname{
+    // border: #feefc3 solid;
+    // border-width: 20px;
+    border-radius: 10px 10px 10px 10px;
+    
+    background-image: -webkit-linear-gradient(left, #feefc3C 10%, white 100%), -webkit-linear-gradient(left, #3EC8AC 0%, #4E90A4 100%);
+    background-image: -moz-linear-gradient(left, #feefc3 10%, white 100%), -moz-linear-gradient(left, #3EC8AC 0%, #4E90A4 100%);
+    background-image: -o-linear-gradient(left, #feefc3 10%, white 100%), -o-linear-gradient(left, #3EC8AC 0%, #4E90A4 100%);
+    background-image: linear-gradient(to right, #feefc3 10%, white 100%), linear-gradient(to right, #3EC8AC 0%, #4E90A4 100%);
 
-    border: red solid; 
     height: auto; 
-    width: 50vw;
+    width: 80vw;
     display: grid;
-    grid-gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
