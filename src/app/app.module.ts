@@ -12,13 +12,27 @@ import { MatIconModule } from '@angular/material/icon';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component'
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AngularFireModule } from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import { LoginComponent } from './admin/login/login.component'
 
+
+const config = {
+  apiKey: "AIzaSyAPUq073NCzk_Cw2ex0yIzNnHSyacb_5eo",
+    authDomain: "memos-a4a21.firebaseapp.com",
+    projectId: "memos-a4a21",
+    storageBucket: "memos-a4a21.appspot.com",
+    messagingSenderId: "425019375866",
+    appId: "1:425019375866:web:b15b9b8016300549998943",
+    measurementId: "G-TFK0VLYVSV"
+};
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    LoginComponent
   ],
   imports: [
     MatDialogModule,
@@ -29,7 +43,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(config),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
