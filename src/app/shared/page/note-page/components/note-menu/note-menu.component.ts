@@ -67,37 +67,4 @@ export class NoteMenuComponent implements OnInit {
     this.fileProgress.emit(show);
   }
 
-  // Check current color is selected
-  isSelect(index: number): boolean {
-    return this.note.selectedColor == index;
-  }
-
-
-
-  @Output() noteDelete = new EventEmitter<boolean>();
-  deleteNoteEmit() {
-    this.noteDelete.emit(true);
-  }
-
-
-  @Output() noteArhive = new EventEmitter<boolean>();
-  archiveNoteEmit() {
-    this.noteArhive.emit(true);
-  }
-
-  // Showed note edit todo list
-  showTodoList() {
-    if (this.details) {
-      this.note.showTodo = true;
-      this.showTodo();
-    } else {
-      this.note.showTodo = !this.note.showTodo;
-    }
-  }
-
-  // Outputing todoList menu click
-  @Output() showNote = new EventEmitter<boolean>();
-  showTodo() {
-    this.showNote.emit(true);
-  }
 }

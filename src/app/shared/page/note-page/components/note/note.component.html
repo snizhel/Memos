@@ -1,7 +1,7 @@
 <div style="float: left;" class="grid" #gridLayout *ngFor="let note of noteServcies.getNotes ;let j= index">
     <div class="item">
         <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'note')}">
-            <div class="noteItem unselectable" (mousedown)="mouseDown($event)" (mouseup)="mouseUp($event)">
+            <div class="noteItem unselectable">
 
                 <div class="cardInfo">
                     <button mat-menu-item class="myMenuItemRiple"
@@ -11,11 +11,10 @@
                     </button>
 
                     <div class="cardImage">
-                        <img draggable="false" *ngIf="note.imagePreview" [ngClass]={imageLoading:fileProgress}
-                            [src]="note.imagePreview">
+                        <img [src]="note.imagePreview">
                         <mat-progress-bar *ngIf="fileProgress" mode="query"></mat-progress-bar>
                     </div>
-                    
+
                     <h3 class="cardTitle">{{note.title}}</h3>
                     <p class="cardDescripion">{{note.description}}</p>
 
@@ -50,9 +49,10 @@
                             <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(j+1)">
                                 <mat-icon>delete</mat-icon>
                             </button>
-                            <app-note-menu  [note]='note' [details]='true' (showNote)="openDialog(note)"
-                                (setMenu)="setMenuStatus($event)" (fileProgress)="setFileProgress($event)">
+                            <app-note-menu [note]='note' (fileProgress)="setFileProgress($event)">
                             </app-note-menu>
+
+
                         </div>
 
 

@@ -5,10 +5,11 @@ import { ArchivePageRoutingModule } from './archive-page-routing.module';
 import { ArchivePageComponent } from './archive-page.component';
 import { NoteComponent } from './components/note/note.component';
 import {MatIconModule} from '@angular/material/icon'
-import {MatMenuModule} from '@angular/material/menu'
+import {MatMenuModule} from '@angular/material/menu';
+import { NoteMenuComponent } from './components/note-menu/note-menu.component'
 
 @NgModule({
-  declarations: [ArchivePageComponent, NoteComponent],
+  declarations: [ArchivePageComponent, NoteComponent, NoteMenuComponent],
   imports: [
     CommonModule,
     ArchivePageRoutingModule,

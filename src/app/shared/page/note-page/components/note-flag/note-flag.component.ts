@@ -12,6 +12,7 @@ export class NoteFlagComponent implements OnInit {
   constructor(public noteServcies: NoteService) { }
   @Input() note: Note;
   menuActiveTrigger: boolean = false;
+  fileProgress: boolean = false;
   public color=this.noteServcies.colors;
   ngOnInit(): void {
   }
@@ -37,7 +38,9 @@ export class NoteFlagComponent implements OnInit {
     // getColor(index: number): string {
     //   return this.colors[index];
     // }
-  
+    setFileProgress(fileProgress: boolean) {
+      this.fileProgress = fileProgress;
+    }
     // Outputing menu opened trigger
     @Output() setMenu = new EventEmitter<boolean>();
     setMenuStatus(status: boolean) {

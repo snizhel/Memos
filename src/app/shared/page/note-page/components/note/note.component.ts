@@ -14,6 +14,11 @@ export class NoteComponent implements OnInit {
   @Input() note: Note;
   menuActiveTrigger: boolean = false;
   fileProgress: boolean = false;
+  @Input() details: boolean; // means that menu not in noteComponent
+  @Input() newNote: boolean; // means that menu in newPageComponent
+  selecetdFile: File;
+  menuActive: boolean = false; // means that one of menu item open
+
 
   public color=this.noteServcies.colors;
 
@@ -45,10 +50,6 @@ export class NoteComponent implements OnInit {
   colorClick(index: number,numb:number) {
     this.noteServcies.changColor(this.color[index],numb,'note');
   }
-
-  // getColor(index: number): string {
-  //   return this.colors[index];
-  // }
   setFileProgress(fileProgress: boolean) {
     this.fileProgress = fileProgress;
   }
@@ -68,5 +69,7 @@ export class NoteComponent implements OnInit {
   setMenuStatus(status: boolean) {
     this.setMenu.emit(status);
   }
+
+  
 
 }
