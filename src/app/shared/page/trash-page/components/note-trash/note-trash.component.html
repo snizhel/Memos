@@ -5,7 +5,6 @@
     </div>
 </div>
 
-
 <!-- <div class="grid" #gridLayout *ngFor="let note of noteServcies.getTrash ;let i = index">
     <div class="item">
         <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorByNum(i+1,'trash')}">
@@ -21,7 +20,6 @@
         </div>
     </div>
 </div> -->
-
 
 <div style="float: left; margin:0px 0px;" class="grid" #gridLayout
     *ngFor="let note of noteServcies.getTrash ;let j = index">
@@ -39,7 +37,7 @@
 
                     <div class="noteMenuWrap">
                         <button style="padding: 5px 0px; width: 100%;" mat-menu-item class="myMenuItem myMenuItemRiple"
-                            (click)="deleteNote(note.id)">
+                            (click)="deleteNote(j+1)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>

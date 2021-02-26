@@ -21,6 +21,8 @@
     font-weight: 600;
     font-family: "Montserrat", sans-serif;
     margin-left: 10px;
+    text-decoration: none;
+    font-size: 25px;
 }
 
 .sidenav-container {
@@ -64,7 +66,7 @@ mat-nav-list mat-icon {
 }
 
 mat-nav-list span {
-    font-size: 13px;
+    font-size: 20px;
     font-weight: 500;
     margin-left: 30px;
 }
@@ -129,4 +131,8 @@ mat-divider {
     width: 50vw !important;
     max-width: 200px !important;
     position:relative;
+}
+
+.loginIn{
+    text-decoration: none; 
 }

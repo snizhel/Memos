@@ -4,7 +4,6 @@
 
 export const environment = {
   production: true,
-  endpoint: "http://127.0.0.1:8080/",
   firebase: {
     apiKey: "AIzaSyAPUq073NCzk_Cw2ex0yIzNnHSyacb_5eo",
     authDomain: "memos-a4a21.firebaseapp.com",

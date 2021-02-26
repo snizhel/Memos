@@ -11,6 +11,16 @@ import * as firebase from 'firebase';
 export class SigninPageComponent implements OnInit {
 
   constructor(private auth: AngularFireAuth) { }
+  ngOnInit(): void {
+    this.auth.authState.subscribe((auth)=>{
+      if (auth){
+        this.user = auth;
+      }
+    });
+  }
+
+  public user : any;
+
   async login() {
     const provider = new firebase.default.auth.GoogleAuthProvider();
     try {
@@ -21,7 +31,17 @@ export class SigninPageComponent implements OnInit {
       alert("login failed");
     }
   }
-  ngOnInit(): void {
+
+  async signOut (){
+try{
+await this.auth.signOut();
+alert ("Signed out")
+}
+catch(err){
+  alert ("Can't sign out")
+
+}
   }
+
 
 }
