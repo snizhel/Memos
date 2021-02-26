@@ -40,12 +40,9 @@ export class NoteMenuComponent implements OnInit {
     // Set file to note
     reader.onload = () => {
       this.note.imagePreview = reader.result as string;
-      // this.noteService.changeImg()
-      this.noteService.changeImg(this.note.id,'archive',this.note.imagePreview,this.note.pin);
     };
     reader.readAsDataURL(this.selecetdFile);
   }
-
 
   // Outputing file upload start/end event
   @Output() fileProgress = new EventEmitter<boolean>();

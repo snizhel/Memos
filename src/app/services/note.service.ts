@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Note } from '../models/note-model';
 import * as uuid from 'uuid';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +10,6 @@ export class NoteService {
   private trashs: Note[];
   private archive: Note[];
   private flag: Note[];
-  private test: Note[];
 
   days = 7;
   date = new Date();
@@ -34,27 +32,28 @@ export class NoteService {
     "#e9eaee",
   ];
 
-
-  constructor(private http: HttpClient) {
-    this.test = [];
-    this.notes = [];
-    this.trashs = [];
-    this.archive = [];
-    this.flag = [];
+  constructor() {
+    // Program default notes
+    // this.notes = [this.getDefaultNote()];
+    this.notes = [this.getDefaultNote(), this.getDefaultNote(), this.getDefaultNote()];
+    this.trashs = [this.getDefaultNote(), this.getDefaultNote(), this.getDefaultNote()];
+    this.archive = [this.getDefaultNote(), this.getDefaultNote(), this.getDefaultNote()];
+    this.flag = [this.getDefaultNote(), this.getDefaultNote(), this.getDefaultNote()];
+    // this.flag=[];
   }
 
   // Example note
   getDefaultNote(): Note {
     return {
       id: uuid.v4(), title: 'firsttitle', description: 'firstdescription', pin: false,
-      labels: [], selectedColor: 0, color: '#fefefe', todoList: [],imagePreview:"",
+      labels: [], selectedColor: 0, color: '#fefefe', todoList: [],
       showTodo: false, arhieved: false, trash: false,
     };
   }
   // Generate emptyNote
   getEmptyNote(): Note {
     return {
-      id: uuid.v4(), title: "", description: "", labels: [], selectedColor: 0, pin: false,imagePreview:"",
+      id: uuid.v4(), title: "", description: "", labels: [], selectedColor: 0, pin: false,
       color: '#fefefe', todoList: [], showTodo: false, arhieved: false, trash: false, num: this.notes.length + 1
     }
   }
@@ -67,128 +66,48 @@ export class NoteService {
     else return true;
   }
 
-  public async addNote(newNote: Note) {
+  addNote(newNote: Note) {
     newNote.id = uuid.v4();
-    await this.http.post(environment.endpoint + "notes", newNote).toPromise();
+    this.notes.push(newNote);
   }
 
-  public async getNotesData() {
-    let data: any;
-    let tempData = await this.http.get(environment.endpoint + "notes").toPromise();
-    data = tempData['notes'];
-    this.notes = await data;
+
+  addToTrash(numb: number) {
+    this.trashs.push(this.notes[numb - 1]);
+    this.notes.splice(numb - 1, 1);
   }
-  public async getFlagsData() {
-    let data: any;
-    let tempData = await this.http.get(environment.endpoint + "flag").toPromise();
-    data = tempData['flags'];
-    this.flag = await data;
+  addNoteToArchive(numb: number) {
+    this.archive.push(this.notes[numb - 1]);
+    this.notes.splice(numb - 1, 1);
   }
 
-  public async getArchivesData() {
-    let data: any;
-    let tempData = await this.http.get(environment.endpoint + "archive").toPromise();
-    data = tempData['archives'];
-    this.archive = await data;
+  addFlagToNote(numb: number) {
+    this.notes.push(this.flag[numb - 1]);
+    this.flag.splice(numb - 1, 1);
   }
 
-  public addToTrash(id: String) {
-    let url = `${environment.endpoint}notes/delete?id=${id}`;
-    for (let i = 0; i < this.notes.length; i++) {
-      if (this.notes[i].id == id) {
-        this.http.delete(url).toPromise();
-        this.http.post(environment.endpoint + "trash", this.notes[i]).toPromise();
-      }
-    }
+  addNoteToFlag(numb: number) {
+    this.flag.push(this.notes[numb - 1]);
+    this.notes.splice(numb - 1, 1);
   }
 
-  public async getTrashData() {
-    let data: any;
-    let tempData = await this.http.get(environment.endpoint + "trash").toPromise();
-    data = tempData['noteTrashs'];
-    this.trashs = await data;
+  addFlagToArchive(numb: number) {
+    this.archive.push(this.flag[numb - 1]);
+    this.flag.splice(numb - 1, 1);
   }
 
-  public deleteInTrash(id: String) {
-    let url = `${environment.endpoint}trash/delete?id=${id}`;
-    this.http.delete(url).toPromise();
-
-  }
-  addNoteToArchive(numb) {
-    let id = numb;
-    let url = `${environment.endpoint}notes/delete?id=${id}`;
-    for (let i = 0; i < this.notes.length; i++) {
-      if (this.notes[i].id == id) {
-        this.http.delete(url).toPromise();
-        this.http.post(environment.endpoint + "archive", this.notes[i]).toPromise();
-      }
-    }
+  addFlagToTrash(numb: number) {
+    this.trashs.push(this.flag[numb - 1]);
+    this.flag.splice(numb - 1, 1);
   }
 
-  addFlagToNote(numb) {
-    let id = numb;
-    // console.log(id);
-    let url = `${environment.endpoint}flag/delete?id=${id}`;
-    for (let i = 0; i < this.flag.length; i++) {
-      if (this.flag[i].id == id) {
-        this.http.delete(url).toPromise();
-        this.flag[i].pin = false;
-        console.log(this.flag[i].pin);
-        this.http.post(environment.endpoint + "notes", this.flag[i]).toPromise();
-      }
-    }
+  deleteInTrash(numb: number) {
+    this.trashs.splice(numb - 1, 1);
   }
-
-  addNoteToFlag(numb) {
-    let id = numb;
-    // console.log(id);
-    let url = `${environment.endpoint}notes/delete?id=${id}`;
-    for (let i = 0; i < this.notes.length; i++) {
-      if (this.notes[i].id == id) {
-        this.http.delete(url).toPromise();
-        this.notes[i].pin = true;
-        console.log(this.notes[i].pin);
-        this.http.post(environment.endpoint + "flag", this.notes[i]).toPromise();
-      }
-    }
+  deleteArchiveToTrash(numb: number) {
+    this.trashs.push(this.archive[numb - 1]);
+    this.archive.splice(numb - 1, 1);
   }
-
-  addFlagToArchive(numb) {
-    let id = numb;
-    let url = `${environment.endpoint}flag/delete?id=${id}`;
-    for (let i = 0; i < this.flag.length; i++) {
-      if (this.flag[i].id == id) {
-        this.http.delete(url).toPromise();
-        this.http.post(environment.endpoint + "archive", this.flag[i]).toPromise();
-      }
-    }
-  }
-
-  addFlagToTrash(numb) {
-    let id = numb;
-    let url = `${environment.endpoint}flag/delete?id=${id}`;
-    for (let i = 0; i < this.flag.length; i++) {
-      if (this.flag[i].id == id) {
-        this.http.delete(url).toPromise();
-        this.http.post(environment.endpoint + "trash", this.flag[i]).toPromise();
-      }
-    }
-  }
-
-  deleteArchiveToTrash(numb) {
-    let id = numb;
-    let url = `${environment.endpoint}archive/delete?id=${id}`;
-    for (let i = 0; i < this.archive.length; i++) {
-      if (this.archive[i].id == id) {
-        this.http.delete(url).toPromise();
-        this.http.post(environment.endpoint + "trash", this.archive[i]).toPromise();
-      }
-    }
-  }
-  public get getTest(): Note[] {
-    return this.test;
-  }
-
   public get getFlag(): Note[] {
     return this.flag;
   }
@@ -205,53 +124,22 @@ export class NoteService {
   }
 
   public changColor(color, numb, page) {
-    let id = numb;
-    let temp = {
-      "id": id,
-      "color": color
-    }
-    if (page == 'note') {
-      let url = `${environment.endpoint}notes/update/color`;
-      this.http.put(url, temp).toPromise();
-    }
-    else if (page == 'flag') {
-      let url = `${environment.endpoint}flag/update/color`;
-      this.http.put(url, temp).toPromise();
+    if (page == 'flag') {
+      this.flag[numb - 1].color = color;
+    } else if (page == 'note') {
+      this.notes[numb - 1].color = color;
     } else if (page == 'archive') {
-      let url = `${environment.endpoint}archive/update/color`;
-      this.http.put(url, temp).toPromise();
+      this.archive[numb - 1].color = color;
     }
 
   }
-
-  public changeImg(id,page,img:string,pin){
-    let temp = {
-      "id": id,
-      "img": img,
-      "page":page,
-      "pin":pin
-    }
-
-    if(page == 'archive'&&pin==false){
-      let url = `${environment.endpoint}archive/update/img`;
-      this.http.put(url, temp).toPromise();
-    }else if (page == 'note'){
-      let url = `${environment.endpoint}notes/update/img`;
-      this.http.put(url, temp).toPromise();
-    }
-  }
-
   public deteleAllOnDays() {
     let current = this.currentDate.getTime();
-    if (current == this.res) {
-      let url = `${environment.endpoint}trash/delete/all`;
-      this.http.delete(url).toPromise();
-    }
+    if (current == this.res) this.trashs = [];
   }
 
   public deleteAll() {
-    let url = `${environment.endpoint}trash/delete/all`;
-    this.http.delete(url).toPromise();
+    this.trashs = [];
   }
 
   public getColorByNum(num: number, page: string) {

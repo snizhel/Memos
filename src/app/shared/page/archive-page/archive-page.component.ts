@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NoteService } from 'src/app/services/note.service';
 
 @Component({
   selector: 'app-archive-page',
@@ -8,10 +7,9 @@ import { NoteService } from 'src/app/services/note.service';
 })
 export class ArchivePageComponent implements OnInit {
 
-  constructor(private noteServices:NoteService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.noteServices.getArchivesData();
   }
 
 }
