@@ -1,10 +1,7 @@
 <div class="login-page">
     <div class="form">
-        <form>
-            <img [src]="user.photoURL">
-            <h1>{{user.displayName}}</h1>
-            <h2>{{user.email}}</h2>
 
+        <form *ngIf="!this.auth1.user">
             <h1 id="title" style="margin: 80px;">Sign in</h1>
             <br>
             <input type="text" placeholder="Username" required />
@@ -13,7 +10,7 @@
             <button class="Font">Log in</button>
             <p class="message">Not registered? <a style="text-decoration: none; color: #1a73e8;" href="register-page">
                     Create an account</a></p>
-            <p>or</p>
+            <p class="line">or</p>
             <div class="google-btn">
                 <div class="google-icon-wrapper">
                     <img class="google-icon"
@@ -21,10 +18,15 @@
                 </div>
                 <a class="btn-text" (click)="login()">Login with Google</a>
             </div>
+        </form>
 
-<!-- 
-            <button (click)="signOut()">signout</button> -->
-
+        <form *ngIf="this.auth1.user">
+            <h1 id="title" style="margin: 40px auto 40px;">Logged in as</h1>
+            <br>
+            <img style="border-radius: 50%; margin-bottom: 20px;" [src]="user.photoURL">
+            <h1>{{user.displayName}}</h1>
+            <br>
+            <h2>{{user.email}}</h2>
         </form>
     </div>
 </div>

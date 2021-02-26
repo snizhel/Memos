@@ -12,9 +12,22 @@
     <app-search-bar></app-search-bar>
 
     <a class="Signin">
-        <mat-icon style="font-size: 36px; margin-right: 15px;">account_circle</mat-icon>
+        <!-- <img [src]="user.photoURL">
+        <h1>{{user.displayName}}</h1>
+        <h2>{{user.email}}</h2> -->
+        <mat-icon style="font-size: 50px; margin-right: 35px; margin-bottom: 25px;" *ngIf="!this.auth.user">
+            account_circle</mat-icon>
+        <img style="border-radius: 50%" *ngIf="this.auth.user" src="{{this.auth.user.photoURL}}" height="50px">
 
-        <a class="loginIn" [routerLink]="['signin-page']"> Sign in </a>
+        <a class="logIn" *ngIf="!this.auth.user" [routerLink]="['signin-page']"> Sign in </a>
+        <!-- <a class="loginOut" *ngIf="this.auth.user"  (click)="logout()"           > Sign out </a> -->
+
+        <!-- (click)="signOut()"
+        <button class="material-icons" *ngIf="!this.auth.user" (click)="loginGoogle()">login</button> -->
+
+        <div class="logOut">
+            <button style="border: none; background-color: transparent; font-size: 35px; margin: 9px 0px" class="material-icons" *ngIf="this.auth.user" (click)="logout()">logout</button>
+        </div>
     </a>
 </mat-toolbar>
 
