@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signin-page',
@@ -10,16 +11,19 @@ import * as firebase from 'firebase';
 
 export class SigninPageComponent implements OnInit {
 
-  constructor(private auth: AngularFireAuth) { }
+  constructor(private auth: AngularFireAuth, public auth1: AuthService) {
+
+  }
+
   ngOnInit(): void {
-    this.auth.authState.subscribe((auth)=>{
-      if (auth){
+    this.auth.authState.subscribe((auth) => {
+      if (auth) {
         this.user = auth;
       }
     });
   }
 
-  public user : any;
+  public user: any;
 
   async login() {
     const provider = new firebase.default.auth.GoogleAuthProvider();
@@ -32,16 +36,14 @@ export class SigninPageComponent implements OnInit {
     }
   }
 
-  async signOut (){
-try{
-await this.auth.signOut();
-alert ("Signed out")
-}
-catch(err){
-  alert ("Can't sign out")
+  async signOut() {
+    try {
+      await this.auth.signOut();
+      alert("Signed out")
+    }
+    catch (err) {
+      alert("Can't sign out")
 
-}
+    }
   }
-
-
 }
