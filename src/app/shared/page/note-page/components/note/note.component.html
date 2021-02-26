@@ -6,7 +6,7 @@
                 <div class="cardInfo">
                     <button mat-menu-item class="myMenuItemRiple"
                         [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'note')}"
-                        (click)="noteFlag(j+1)">
+                        (click)="noteFlag(note.id)">
                         <mat-icon>turned_in_not</mat-icon>
                     </button>
 
@@ -35,7 +35,7 @@
 
                                         <div class="colorBtn"
                                             *ngFor="let color of this.noteServcies.colors; let i = index;"
-                                            [ngStyle]="{'background-color':color}" (click)="colorClick(i,j+1)">
+                                            [ngStyle]="{'background-color':color}" (click)="colorClick(i,note.id)">
 
                                         </div>
 
@@ -43,13 +43,13 @@
 
                                 </div>
                             </mat-menu>
-                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(j+1)">
+                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(note.id)">
                                 <mat-icon>archive</mat-icon>
                             </button>
 
                             <app-note-menu [note]='note' (fileProgress)="setFileProgress($event)">
                             </app-note-menu>
-                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(j+1)">
+                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(note.id)">
                                 <mat-icon>delete</mat-icon>
                             </button>
 

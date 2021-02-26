@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component'
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   imports: [
     MatDialogModule,
+    HttpClientModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

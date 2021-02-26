@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NoteService } from 'src/app/services/note.service';
 
 @Component({
   selector: 'app-trash-page',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrashPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private noteServcies:NoteService) { }
 
   ngOnInit(): void {
+    this.noteServcies.getTrashData();
   }
 
 }

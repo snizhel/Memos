@@ -9,24 +9,27 @@ import { NoteService } from 'src/app/services/note.service';
 })
 export class NotePageComponent implements OnInit {
   // @Input() notes: Note;
-  notes : Note;
-  constructor(public noteServcies:NoteService) { }
+  notes: Note;
+  constructor(public noteServcies: NoteService) { }
 
   ngOnInit(): void {
-
+    this.noteServcies.getNotesData();
+    this.noteServcies.getFlagsData();
   }
 
   // check(numb) {
   //   // console.log(numb);
   //   // this.noteServcies.addToTrash(numb);
   //   // this.noteServcies.getNotes();
-    
+
   //   this.noteServcies.addToTrash(numb);
 
   // }
 
-  checkArray(){
+  checkArrayTest() {
     console.log(this.noteServcies.getNotes);
   }
-
+  checkArrayData() {
+    // this.noteServcies.getNotesData()
+  }
 }

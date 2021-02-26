@@ -57,6 +57,7 @@ export class NoteMenuComponent implements OnInit {
     // Set file to note
     reader.onload = () => {
       this.note.imagePreview = reader.result as string;
+      this.noteService.changeImg(this.note.id,'note',this.note.imagePreview,this.note.pin)
     };
     reader.readAsDataURL(this.selecetdFile);
   }
