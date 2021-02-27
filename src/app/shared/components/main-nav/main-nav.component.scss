@@ -26,10 +26,7 @@
 }
 
 .sidenav-container {
-    /*height:100%;*/
-    
     background: white;
-    
 }
 
 .sidenav {
@@ -109,7 +106,6 @@ mat-divider {
 }
 
 .menu-content {
-    /*margin-top: 10%!important;*/
     padding-top: 70px;
 }
 
@@ -137,27 +133,3 @@ mat-divider {
     text-decoration: none; 
     margin-top: 10px;
 }
-
-// .loginOut{
-//     text-decoration: none; 
-//     margin: 10px 0px;
-// }
-
-// .logOut
-// {
-//   font-size: 50px;
-//   width: 50px;
-//   height: 50px;
-//   transition-duration: 1s;
-//   cursor: pointer;
-//   border-style: solid;
-//   border-color: transparent;
-//   border-radius: 10px 10px 10px 10px;
-//   background-color: transparent;
-// }
-// .logOut:hover 
-// {
-//   background-color: white;
-//   border-color: white;
-//   color: #29b6f6;
-// }
