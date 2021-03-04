@@ -1,0 +1,18 @@
+<div class="body">
+    <app-new-note></app-new-note>
+
+    <div class="grid" style="display: flex;" #gridLayout>
+        <div>
+            <div class="item-content">
+                <div>
+                    <app-note-flag [note]=note *ngFor="let note of noteServcies.getFlag"></app-note-flag>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item-content">
+        <div>
+            <app-note [note]=note *ngFor="let note of noteServcies.getNotes"></app-note>
+        </div>
+    </div>
+</div>
