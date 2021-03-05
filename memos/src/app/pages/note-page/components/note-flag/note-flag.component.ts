@@ -35,8 +35,8 @@ export class NoteFlagComponent implements OnInit {
       return this.note.selectedColor == index;
     }
     // Color menu item click event handler
-    colorClick(index: number,numb:number) {
-      this.noteServcies.changColor(this.color[index],numb,'flag');
+    colorClick(index: number,numb:number,shareTo) {
+      this.noteServcies.changColor(this.color[index],numb,'flag',shareTo);
     }
   
     // getColor(index: number): string {

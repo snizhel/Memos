@@ -1,6 +1,8 @@
 import { Todo } from './todo-model';
 
 export class Note {id: any;
+    shareFrom:string;
+    shareTo:string;
     num?:Number;
     title?: string;
     description?: string;

@@ -68,10 +68,15 @@
                 </mat-form-field>
 
 
-                <button (click)="check()">click</button>
+                <button (click)="check()">shared</button>
                 <div *ngFor="let shared of shared"><button (click)="getShared(shared.email)">{{shared.email}}</button>
                 </div>
                 <button (click)="changeBack()">Back</button>
+
+                <button (click)="sharedNote()">sharedNote</button>
+                <div *ngFor="let shared of noteShared"><button (click)="getSharedNote(shared.email)">{{shared.email}}</button>
+                </div>
+                <!-- <button (click)="changeBack()">Back</button> -->
             </form>
 
 

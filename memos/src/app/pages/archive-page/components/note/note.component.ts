@@ -37,10 +37,11 @@ export class NoteComponent implements OnInit {
       return this.note.selectedColor == index;
     }
     // Color menu item click event handler
-    colorClick(index: number,numb:number) {
+    colorClick(index: number,numb:number,shareTo) {
       // this.noteServcies.changColor(this.color[index],numb,'archive');
       // console.log(this.color[index])
-      this.noteServcies.changColor(this.color[index],numb,'archive')
+      // console.log(shareTo);
+      this.noteServcies.changColor(this.color[index],numb,'archive',shareTo)
     }
     upload(event: any,id,pin) {
       this.noteServcies.changeImgURL(event,id,pin,"archive");

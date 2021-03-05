@@ -29,7 +29,7 @@
 
                                         <div class="colorBtn"
                                             *ngFor="let color of this.noteServcies.colors; let i = index;"
-                                            [ngStyle]="{'background-color':color}" (click)="colorClick(i,note.id)">
+                                            [ngStyle]="{'background-color':color}" (click)="colorClick(i,note.id,note.shareTo)">
 
                                         </div>
 

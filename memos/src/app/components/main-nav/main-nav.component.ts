@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { NoteService } from 'src/app/services/note.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-main-nav',
   templateUrl: './main-nav.component.html',
@@ -27,9 +28,18 @@ export class MainNavComponent implements OnInit {
     this.shareSer.checkEmail(value);
     // console.log("test");
   }
+  public noteShared:Array<any>;
+  sharedNote(){
+    this.noteShared = this.noteSer.getSharedNote;
+    
+  }
+  getSharedNote(email){
+    this.shareSer.addNoteShared(email);
+  }
   public shared:Array<any>
   check() {
-    this.shared = this.noteSer.getShared
+    this.shared = this.noteSer.getShared;
+
     
   }
 

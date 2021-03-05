@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestoreCollectionGroup } from "@angular/fire/firestore"
 import { Observable } from 'rxjs';
-import { finalize } from "rxjs/operators";
+import { finalize, share } from "rxjs/operators";
 import { AngularFireStorage } from "@angular/fire/storage";
 @Injectable({
   providedIn: 'root'
@@ -120,6 +120,8 @@ export class NoteService implements OnInit{
   addUserMail(email) {
     this.userMail = email;
     this.preUserMail = email;
+
+
     this.getUserShared();
     this.getData();
   }
@@ -153,6 +155,19 @@ export class NoteService implements OnInit{
       this.shared = data;
     })
   }
+  public sharedNote:any;
+  getUserNoteShared(){
+    let currentUser = this.userMail;
+    let shared:Observable<any>;
+    shared = this.fire.collection("user").doc(currentUser).collection("sharedNote").valueChanges();
+    shared.subscribe((data)=>{
+      this.sharedNote = data;
+    })
+  }
+  public sharedNoteUser:any
+  checkUserSharedNoteTo(){
+    
+  }
 
   check() {
     console.log(this.shared);
@@ -160,6 +175,9 @@ export class NoteService implements OnInit{
   }
   public get getShared() {
     return this.shared;
+  }
+  public get getSharedNote() {
+    return this.sharedNote;
   }
 
   public activeShared(email) {
@@ -179,14 +197,15 @@ export class NoteService implements OnInit{
     return {
       id: "", title: 'firsttitle', description: 'firstdescription', pin: false, notes: true,
       labels: [], selectedColor: 0, color: '#fefefe', todoList: [], imagePreview: "",
-      showTodo: false, arhieved: false, trash: false,
+      showTodo: false, arhieved: false, trash: false, shareFrom:"",shareTo:''
     };
   }
   // Generate emptyNote
   getEmptyNote(): Note {
     return {
       id: "", title: "", description: "", labels: [], selectedColor: 0, pin: false, imagePreview: "", notes: true,
-      color: '#fefefe', todoList: [], showTodo: false, arhieved: false, trash: false, num: this.notes.length + 1
+      color: '#fefefe', todoList: [], showTodo: false, arhieved: false, trash: false, num: this.notes.length + 1,
+      shareFrom:"",shareTo:''
     }
   }
 
@@ -197,7 +216,13 @@ export class NoteService implements OnInit{
       (note.todoList.length && note.showTodo)) return false;
     else return true;
   }
-
+  getNote(id){
+    for (let i = 0; i < this.notes.length; i++) {
+      if(this.notes[i].id==id){
+        return this.notes[i];
+      }
+    }
+  }
   public addNote(newNote: Note) {
     let user1 = this.userMail;
     newNote.id = this.id;
@@ -218,7 +243,8 @@ export class NoteService implements OnInit{
     this.getArchivesData();
     this.getTrashData();
     this.getUserShared();
-
+    this.getUserNoteShared();
+    this.checkUserSharedNoteTo();
   }
   public getNotesData() {
 
@@ -446,7 +472,12 @@ export class NoteService implements OnInit{
     return this.trashs;
   }
 
-  public changColor(color, id, page) {
+  public changColor(color, id, page,shareTo) {
+    let currentUser = this.userMail;
+    if(shareTo==""){
+    }else{
+      this.fire.collection("user").doc(shareTo).collection("sharedNote").doc(currentUser).collection("notes").doc(id).update({color:color})
+    }
     let user1 = this.userMail;
     switch (page) {
       case 'note': {
