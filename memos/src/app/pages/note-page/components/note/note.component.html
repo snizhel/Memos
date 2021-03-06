@@ -3,15 +3,26 @@
         [ngStyle]="{'background-color':this.noteServcies.getColorById(note.id,'note',note.notes)}">
         <div class="noteItem unselectable">
             <div class="cardInfo">
+                <div style="display: flex;justify-content: flex-end;">
+                    <button style="width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                    mat-raised-button (click)="openDialog(note.id)">
+                        <mat-icon>share</mat-icon>
+                    </button>
+                    
+                    <button style="width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                        (click)="noteFlag(note.id)">
+                        <mat-icon>turned_in_not</mat-icon>
+                    </button>
+                </div>
 
-                <button style="margin-left: 165px; width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
-                    (click)="noteFlag(note.id)">
-                    <mat-icon>turned_in_not</mat-icon>
-                </button>
-                <!-- <button mat-button (click)="openDialog()">Open dialog</button> -->
-                <!-- <button (click)="addToShare(note.id,'')">add</button> -->
 
-                <input type="text" (keyup.enter)="addToShare(note.id,message.value)" #message>
+
+
+
+
+
+
+                <!-- <input type="text" (keyup.enter)="addToShare(note.id,message.value)" #message> -->
 
 
                 <div class="cardImage">

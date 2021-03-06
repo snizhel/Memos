@@ -1,18 +1,8 @@
-<!-- <mat-form-field class="example-form-field">
-    <mat-label>Clearable input</mat-label>
-    <input matInput type="text" (keyup.enter)="onEnter(message.value)" matInput #message
-        maxlength="256" placeholder="Ex. abc@gmail.com">
-</mat-form-field> -->
-<!-- 
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
+    <h2>Nhập email người muốn share</h2>
+    <input type="text" (keyup.enter)="addToShare(data,message.value)" #message>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+<!-- <div mat-dialog-actions>
+
 </div> -->

@@ -30,15 +30,15 @@ export class NoteComponent implements OnInit {
   selecetdFile: File;
   menuActive: boolean = false; // means that one of menu item open
   
-  openDialog(): void {
+  openDialog(id): void {
     const dialogRef = this.dialog.open(DialogNote, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
+      width: 'auto',
+      data: {id: id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      
     });
   }
 
@@ -100,17 +100,28 @@ export class NoteComponent implements OnInit {
   }
 }
 
+
 @Component({
   selector: 'dialog-note',
   templateUrl: './dialog-note.html',
 })
 
+
 export class DialogNote {
+  @Input() note: Note;
   constructor(
     public dialogRef: MatDialogRef<DialogNote>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public shareSer:SharedService) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  check(data){
+    console.log(data.id);
+  }
+
+  addToShare(data,shareTo){
+    this.shareSer.checkEmailShared(data.id,shareTo);
   }
 }
