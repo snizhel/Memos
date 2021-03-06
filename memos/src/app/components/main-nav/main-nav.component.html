@@ -9,6 +9,7 @@
         <a [routerLink]="['note-page']" class="titleName">{{routeName}}</a>
     </div>
 
+
     <app-search-bar></app-search-bar>
         <div>
             <img style="border-radius: 50%;margin-left: 5px;" src="{{this.auth.user.photoURL}}" height="50px">
@@ -18,6 +19,7 @@
                 logout</mat-icon>
             <!-- <img src="{{this.user.avatar}}" alt=""> -->
         </div>
+
 
 </mat-toolbar>
 
@@ -64,17 +66,35 @@
 
             <!-- share input -->
             <form class="example-form">
-                <mat-form-field class="example-form-field">
-                    <mat-label>Clearable input</mat-label>
-                    <input matInput type="text" (keyup.enter)="onEnter(message.value)" matInput #message maxlength="256"
-                        placeholder="Ex. abc@gmail.com">
-                </mat-form-field>
 
 
-                <button (click)="check()">click</button>
-                <div *ngFor="let shared of shared"><button (click)="getShared(shared.email)">{{shared.email}}</button>
+                <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                    (click)="check()">
+                    <mat-icon>share</mat-icon>
+                </button>
+                <!-- <div *ngFor="let shared of shared">
+                </div> -->
+                <div *ngFor="let shared of shared">
+                    <button
+                        style="border:none;background-color: white;border-radius: 25px;padding: 5px;border: solid rgba(black,0.1);margin-top: 1%;margin-bottom: 1%;"
+                        (click)="getShared(shared.email)">{{shared.email}}</button>
                 </div>
-                <button (click)="changeBack()">Back</button>
+                <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                    (click)="changeBack()">
+                    <mat-icon>settings_backup_restore</mat-icon>
+                </button>
+                <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                    (click)="sharedNote()">
+                    <mat-icon>note</mat-icon>
+                </button>
+
+                <div *ngFor="let shared of noteShared">
+                    <button
+                        style="border:none;background-color: white;border-radius: 25px;padding: 5px;border: solid rgba(black,0.1);margin-top: 1%;margin-bottom: 1%;"
+                        (click)="getSharedNote(shared.email)">{{shared.email}}
+                    </button>
+                </div>
+
             </form>
 
 

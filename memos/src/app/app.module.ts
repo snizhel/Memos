@@ -47,7 +47,8 @@ import { SearchBarComponent } from '../app/components/search-bar/search-bar.comp
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'Memos'),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    
 
   ],
   providers: [],
