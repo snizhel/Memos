@@ -1,0 +1,33 @@
+<div class="body">
+    <app-new-note></app-new-note>
+
+    <h1>Ghim</h1>
+    <div class="grid" style="display: flex;" #gridLayout>
+        <div>
+            <div class="item-content">
+                <div>
+                    <app-note-flag [note]=note *ngFor="let note of noteServcies.getFlag"></app-note-flag>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Khác</h1>
+    <div class="grid" style="display: flex;" #gridLayout>
+        <div class="item-content">
+            <div>
+                <app-note [note]=note *ngFor="let note of noteServcies.getNotes"></app-note>
+            </div>
+        </div>
+    </div>
+    
+    <h1>Share Note</h1>
+    <div class="grid" style="display: flex;" #gridLayout>
+        <div class="item-content">
+            <div>
+                <app-note-shared [note]=note *ngFor="let note of sharedSer.getNoteSharedData"></app-note-shared>
+            </div>
+        </div>
+    </div>
+
+</div>
