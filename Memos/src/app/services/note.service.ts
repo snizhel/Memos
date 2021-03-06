@@ -1,4 +1,4 @@
-import { Injectable,OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Note } from '../models/note-model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -6,10 +6,11 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection,
 import { Observable } from 'rxjs';
 import { finalize, share } from "rxjs/operators";
 import { AngularFireStorage } from "@angular/fire/storage";
+import { arch } from 'node:os';
 @Injectable({
   providedIn: 'root'
 })
-export class NoteService implements OnInit{
+export class NoteService implements OnInit {
 
   private notes: Note[];
   private notes1: Note[];
@@ -83,7 +84,7 @@ export class NoteService implements OnInit{
     this.fire.collection("user").doc("user1").collection("flags").doc(data.id.toString()).set(data);
     this.fire.collection("user").doc("user1").collection("flags").doc(data1.id.toString()).set(data1);
   }
-  
+
   selectedFile: File = null;
   fb;
   downloadURL: Observable<string>;
@@ -105,7 +106,6 @@ export class NoteService implements OnInit{
             }
             this.fb;
             this.img[0] = this.fb;
-            console.log(this.fb);
             this.changeImg(id, page, this.fb, pin);
 
           });
@@ -126,7 +126,7 @@ export class NoteService implements OnInit{
     this.getUserShared();
     this.getData();
   }
-  deleteUserMail(){
+  deleteUserMail() {
     this.userMail = undefined;
     this.preUserMail = undefined;
     // this.getData();
@@ -156,18 +156,18 @@ export class NoteService implements OnInit{
       this.shared = data;
     })
   }
-  public sharedNote:any;
-  getUserNoteShared(){
+  public sharedNote: any;
+  getUserNoteShared() {
     let currentUser = this.userMail;
-    let shared:Observable<any>;
+    let shared: Observable<any>;
     shared = this.fire.collection("user").doc(currentUser).collection("sharedNote").valueChanges();
-    shared.subscribe((data)=>{
+    shared.subscribe((data) => {
       this.sharedNote = data;
     })
   }
-  public sharedNoteUser:any
-  checkUserSharedNoteTo(){
-    
+  public sharedNoteUser: any
+  checkUserSharedNoteTo() {
+
   }
 
   check() {
@@ -198,7 +198,7 @@ export class NoteService implements OnInit{
     return {
       id: "", title: 'firsttitle', description: 'firstdescription', pin: false, notes: true,
       labels: [], selectedColor: 0, color: '#fefefe', todoList: [], imagePreview: "",
-      showTodo: false, arhieved: false, trash: false, shareFrom:"",shareTo:''
+      showTodo: false, arhieved: false, trash: false, shareFrom: "", shareTo: ''
     };
   }
   // Generate emptyNote
@@ -206,7 +206,7 @@ export class NoteService implements OnInit{
     return {
       id: "", title: "", description: "", labels: [], selectedColor: 0, pin: false, imagePreview: "", notes: true,
       color: '#fefefe', todoList: [], showTodo: false, arhieved: false, trash: false, num: this.notes.length + 1,
-      shareFrom:"",shareTo:''
+      shareFrom: "", shareTo: ''
     }
   }
 
@@ -217,9 +217,9 @@ export class NoteService implements OnInit{
       (note.todoList.length && note.showTodo)) return false;
     else return true;
   }
-  getNote(id){
+  getNote(id) {
     for (let i = 0; i < this.notes.length; i++) {
-      if(this.notes[i].id==id){
+      if (this.notes[i].id == id) {
         return this.notes[i];
       }
     }
@@ -320,11 +320,11 @@ export class NoteService implements OnInit{
 
 
   }
-  public async addToTrash(id: String,shareTo) {
+  public async addToTrash(id: String, shareTo) {
     let user1 = this.userMail;
-    if(shareTo ==undefined ||shareTo==""){
+    if (shareTo == undefined || shareTo == "") {
 
-    }else{
+    } else {
       this.fire.collection("user").doc(shareTo).collection("sharedNote").doc(user1).collection("notes").doc(id.toString()).delete();
     }
     // let urlDelNotes = `${environment.endpoint}notes/id/delete?id=${id}`;
@@ -357,6 +357,7 @@ export class NoteService implements OnInit{
     // let urlDelNotes = `${environment.endpoint}notes/id/delete?id=${id}`;
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].id == id) {
+
         this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).delete();
         this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).set(this.notes[i]);
         // this.notes[i].pin = false;
@@ -385,7 +386,8 @@ export class NoteService implements OnInit{
     let flag: any = this.flag;
     for (let i = 0; i < flag.length; i++) {
       if (flag[i].id == id) {
-        flag[i].pin = false;
+
+
         this.fire.collection("user").doc(user1).collection("flags").doc(flag[i].id).delete();
         this.fire.doc(`user/${user1}/notes/${id}`).set(flag[i]);
       }
@@ -454,6 +456,7 @@ export class NoteService implements OnInit{
     let urlDelArchive = `${environment.endpoint}archives/id/delete?id=${id}`;
     for (let i = 0; i < this.archive.length; i++) {
       if (this.archive[i].id == id) {
+        this.archive[i].arhieved = true;
         // this.notes[i].pin = false;
         // this.http.delete(urlDelArchive).toPromise();
         // this.http.post(environment.endpoint + "trashs/create", this.archive[i]).toPromise();
@@ -477,12 +480,58 @@ export class NoteService implements OnInit{
   public get getTrash(): Note[] {
     return this.trashs;
   }
+  public getArchiveById(id) {
+    for (let i = 0; i < this.archive.length; i++) {
+      if (this.archive[i].id == id) {
+        return this.archive[i];
+      }
+    }
+  }
+  public getTrashsById(id) {
+    for (let i = 0; i < this.trashs.length; i++) {
+      if (this.trashs[i].id == id) {
+        return this.trashs[i];
+      }
+    }
+  }
 
-  public changColor(color, id, page,shareTo) {
+  public restoreNote(pin, archive, id, page) {
+    let user = this.userMail;
+    if (page == 'archive') {
+      let archiveData = this.getArchiveById(id);
+      if (pin == false) {
+        this.fire.collection("user").doc(user).collection("notes").doc(id).set(archiveData);
+        this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
+        //restore archive to note
+      } else if (pin == true) {
+        this.fire.collection("user").doc(user).collection("flags").doc(id).set(archiveData);
+        this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
+        //restore archive to flag
+      }
+    } else {
+      let trashsData = this.getTrashsById(id);
+      if (archive == true) {
+        this.fire.collection("user").doc(user).collection("archives").doc(id).set(trashsData);
+        this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
+        //restore trashs to archive
+      } else if (pin == true && archive == false) {
+        this.fire.collection("user").doc(user).collection("flags").doc(id).set(trashsData);
+        this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
+        //restore trashs to flag
+      } else if (pin == false && archive == false) {
+        this.fire.collection("user").doc(user).collection("notes").doc(id).set(trashsData);
+        this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
+        //restore trashs to note
+      }
+    }
+
+  }
+
+  public changColor(color, id, page, shareTo) {
     let currentUser = this.userMail;
-    if(shareTo==""){
-    }else{
-      this.fire.collection("user").doc(shareTo).collection("sharedNote").doc(currentUser).collection("notes").doc(id).update({color:color})
+    if (shareTo == "") {
+    } else {
+      this.fire.collection("user").doc(shareTo).collection("sharedNote").doc(currentUser).collection("notes").doc(id).update({ color: color })
     }
     let user1 = this.userMail;
     switch (page) {

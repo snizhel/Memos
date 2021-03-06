@@ -13,6 +13,7 @@ export class TrashPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   deleteAll() {
     this.noteServcies.deleteAll();
     this.authSer.checkLogin();

@@ -31,7 +31,9 @@ export class NoteComponent implements OnInit {
   //   this.noteServcies.addFlagToArchive(numb);
   // }
   
-
+  changeNote(pin,archive,id){
+    this.noteServcies.restoreNote(pin,archive,id,'archive');
+  }
     // Check current color is selected
     isSelect(index: number): boolean {
       return this.note.selectedColor == index;

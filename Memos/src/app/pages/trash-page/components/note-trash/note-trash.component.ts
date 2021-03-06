@@ -16,6 +16,9 @@ export class NoteTrashComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  changeNote(pin,archive,id){
+    this.noteServcies.restoreNote(pin,archive,id,'trashs');
+  }
   deleteNote(numb) {
     this.noteServcies.deleteInTrash(numb);
   }
