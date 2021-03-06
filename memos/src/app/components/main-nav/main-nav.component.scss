@@ -28,9 +28,14 @@
     background: white;
 }
 
-.sidenav {
+.sidenav  {
     width: 280px;
     border: none;
+    
+}
+.sidenav ::-webkit-scrollbar{
+display: hidden;
+width: 0;
 }
 
 .sidenav .mat-toolbar {
