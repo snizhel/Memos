@@ -89,11 +89,11 @@ export class NoteService implements OnInit{
   downloadURL: Observable<string>;
 
   public changeImgURL(event, id, pin, page) {
-    const file = event.target.files[0];
+    let file = event.target.files[0];
     let n = file.name;
-    const filePath = `RoomsImages/${n}`;
-    const fileRef = this.fireData.ref(filePath);
-    const task = this.fireData.upload(`RoomsImages/${n}`, file);
+    let filePath = `RoomsImages/${n}`;
+    let fileRef = this.fireData.ref(filePath);
+    let task = this.fireData.upload(`RoomsImages/${n}`, file);
     task
       .snapshotChanges()
       .pipe(
@@ -105,6 +105,7 @@ export class NoteService implements OnInit{
             }
             this.fb;
             this.img[0] = this.fb;
+            console.log(this.fb);
             this.changeImg(id, page, this.fb, pin);
 
           });
