@@ -13,7 +13,7 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
   styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent implements OnInit {
-
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   constructor(private noteSer: NoteService,
     private breakpointObserver: BreakpointObserver,
     public auth: AuthService,
@@ -30,6 +30,7 @@ export class MainNavComponent implements OnInit {
   }
   public noteShared:Array<any>;
   sharedNote(){
+    
     this.noteShared = this.noteSer.getSharedNote;
     
   }
