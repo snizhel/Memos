@@ -1,6 +1,97 @@
-.wrap {
-	width: 100vw;
-	aspect-ratio: 16 / 10;
-	background: linear-gradient(35deg, #3c2254 50%, #643a7a 25%);
-  font-family: "Poppins", sans-serif !important;
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+* {
+	box-sizing: border-box;
+}
+
+.ok {
+	background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://gdurl.com/gJJK");
+	aspect-ratio: 16 / 8.4;
+	// margin: -0.5%;
+}
+
+.container {
+  display: flex;
+	justify-content: center;
+	padding-top: 70px;
+	// margin: -6px 0 0 0;
+}
+
+.price-plan {
+	box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.5);
+	border-radius: 4px;
+	flex: 1;
+	padding: 0 30px 30px;
+	margin: 2%;
+	min-width: 200px;
+	max-width: 300px;
+  	text-align: center;
+  	margin-top: 100px;
+}
+
+.fancy {
+  margin-top: 20px;
+  margin-bottom:20px;
+  transform: scale(1.1);
+  background-image: url(http://www.webdesignhot.com/wp-content/uploads/2015/08/Colorful-Low-Poly-Abstract-Background-Vector-Illustration.jpg);
+  background-size: 200% 200%;
+  background-position-x:50%;
+  color:white;
+}
+
+.price-points {
+  list-style-type:none;
+  padding:0px;
+}
+
+.price-points li {
+  padding:10px 0px;
+}
+
+.price-points li:not(:last-of-type) {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.price {
+  font-size:32px;
+  font-weight:300;
+}
+
+// .price sub,
+// .price sup {
+//   font-size:16px;
+//   font-weight:100;
+// }
+
+
+
+/* Fourth Row */
+.polyFourth {
+  width: 150px;
+  padding: 10px 18px;
+  border: none;
+  background-color:white;
+  background-size: 300%;
+  color: #000000;
+  font-family: "Raleway", sans-serif;
+  font-size: 18px;
+  font-weight:bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition-duration: 0.5s;
+}
+
+.polyFourth:hover {
+  background-size: 150%;
+  transition-duration: 0.3s;
+  transform: scale(1.2);
+}
+
+.polyFourth:active {
+  transform:scale(1.15);
+  transition-duration: 0.1s;
+}
+
+.poly3 {
+  background-position-x: 45%;
 }
