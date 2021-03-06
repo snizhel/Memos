@@ -319,8 +319,13 @@ export class NoteService implements OnInit{
 
 
   }
-  public async addToTrash(id: String) {
+  public async addToTrash(id: String,shareTo) {
     let user1 = this.userMail;
+    if(shareTo ==undefined ||shareTo==""){
+
+    }else{
+      this.fire.collection("user").doc(shareTo).collection("sharedNote").doc(user1).collection("notes").doc(id.toString()).delete();
+    }
     // let urlDelNotes = `${environment.endpoint}notes/id/delete?id=${id}`;
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].id == id) {

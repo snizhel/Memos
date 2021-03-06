@@ -58,8 +58,8 @@ export class NoteComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  public deleteNote(id) {
-    this.noteServcies.addToTrash(id);
+  public deleteNote(id,shareTo) {
+    this.noteServcies.addToTrash(id,shareTo);
   }
 
   public storeNote(id) {
