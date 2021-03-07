@@ -7,13 +7,10 @@
   scroll-behavior: smooth;
 }
 
-.ok {
-  // position: initial;
-}
 .wrapper {
   width: auto;
   height: 100vh;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../assets/bg.png");
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../assets/home.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -49,7 +46,7 @@
   font-weight: 600;
   letter-spacing: 0.7rem;
   color: white;
-  margin: 4%;
+  margin-top: 10px;
 }
 .menu {
   display: inline-block;
@@ -81,11 +78,11 @@
 .menu ul li a:hover {
   border-color: white;
 }
-.menu ul li:nth-child(3) a {
+.menu ul li:nth-child(2) a {
   color: #fff200;
   border: 1px solid #fff200;
 }
-.menu ul li:nth-child(3) a:hover {
+.menu ul li:nth-child(2) a:hover {
   color: black;
   background-color: #fff200;
 }
