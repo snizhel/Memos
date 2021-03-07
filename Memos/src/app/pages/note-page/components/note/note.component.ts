@@ -6,8 +6,7 @@ import { EditNoteModalComponent } from './edit-note-modal/edit-note-modal.compon
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SharedService } from 'src/app/services/shared.service';
 export interface DialogData {
-  animal: string;
-  name: string;
+  id: string;
 }
 
 
@@ -19,8 +18,7 @@ export interface DialogData {
 
 
 export class NoteComponent implements OnInit {
-  animal: string;
-  name: string;
+
 
   @Input() note: Note;
   menuActiveTrigger: boolean = false;
@@ -37,7 +35,7 @@ export class NoteComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      // console.log('The dialog was closed');
       
     });
   }
@@ -124,5 +122,6 @@ export class DialogNote {
 
   addToShare(data,shareTo){
     this.shareSer.checkEmailShared(data.id,shareTo);
+    this.dialogRef.close();
   }
 }
