@@ -5,12 +5,15 @@
             <div class="noteItem unselectable">
 
                 <div class="cardInfo">
-                    <div class="cardImage">
-                        <img [src]="note.imagePreview">
-                    </div>
 
-                    <h3 class="cardTitle">{{note.title}}</h3>
-                    <p class="cardDescripion">{{note.description}}</p>
+                    <div (click)="openDialogContent(note)">
+                        <div class="cardImage">
+                            <img [src]="note.imagePreview">
+                        </div>
+                        <h3 class="cardTitle">{{note.title}}</h3>
+                        <p class="cardDescripion">{{note.description}}</p>
+                    </div>
+                    
 
 
                     <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">

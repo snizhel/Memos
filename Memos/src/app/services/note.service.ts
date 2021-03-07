@@ -280,6 +280,45 @@ export class NoteService implements OnInit {
     })
   }
 
+  public updateTitile(id,update,page){
+    let currentUser = this.userMail;
+    if(page=='notes'){
+      //change title in notes
+      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({title:update});
+    }else if (page=='flags'){
+      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({title:update});
+      //change title in flags
+    }else if (page=='archives'){
+      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({title:update});
+      //change title in archives
+    }
+  }
+  public updateDescription(id,update,page){
+    let currentUser = this.userMail;
+    if(page=='notes'){
+      //change Description in notes
+      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({description:update});
+    }else if (page=='flags'){
+      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({description:update});
+      //change Description in flags
+    }else if (page=='archives'){
+      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({description:update});
+      //change Description in archives
+    }
+  }
+  public updateBoth(id,title,description,page){
+    let currentUser = this.userMail;
+    if(page=='notes'){
+      //change Description in notes
+      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({title:title,description:description});
+    }else if (page=='flags'){
+      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({title:title,description:description});
+      //change Description in flags
+    }else if (page=='archives'){
+      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({title:title,description:description});
+      //change Description in archives
+    }
+  }
 
   public getArchivesData() {
     let user1 = this.userMail;

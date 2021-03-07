@@ -10,6 +10,7 @@ export interface DialogData {
 }
 
 
+
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
@@ -27,23 +28,31 @@ export class NoteComponent implements OnInit {
   @Input() newNote: boolean; // means that menu in newPageComponent
   selecetdFile: File;
   menuActive: boolean = false; // means that one of menu item open
-  
+
   openDialog(id): void {
     const dialogRef = this.dialog.open(DialogNote, {
       width: 'auto',
-      data: {id: id}
+      data: { id: id }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log('The dialog was closed');
-      
+
     });
+  }
+  openDialogContent(noteData) {
+    // console.log(noteData);
+    const dialogRef = this.dialog.open(DialogContent, {
+      width: 'auto',
+      data: noteData
+    });
+
   }
 
   public color = this.noteServcies.colors;
 
-  addToShare(id,shareTo){
-    this.shareSer.checkEmailShared(id,shareTo);
+  addToShare(id, shareTo) {
+    this.shareSer.checkEmailShared(id, shareTo);
   }
   onEnter(value: string) {
     // this.shareSer.checkEmail(value);
@@ -51,13 +60,13 @@ export class NoteComponent implements OnInit {
   }
 
   constructor(public noteServcies: NoteService,
-    public dialog: MatDialog,public shareSer:SharedService) {
+    public dialog: MatDialog, public shareSer: SharedService) {
   }
 
   ngOnInit(): void {
   }
-  public deleteNote(id,shareTo) {
-    this.noteServcies.addToTrash(id,shareTo);
+  public deleteNote(id, shareTo) {
+    this.noteServcies.addToTrash(id, shareTo);
   }
 
   public storeNote(id) {
@@ -74,17 +83,17 @@ export class NoteComponent implements OnInit {
     return this.note.selectedColor == index;
   }
   // Color menu item click event handler
-  colorClick(index: number, numb: number,shareTo) {
+  colorClick(index: number, numb: number, shareTo) {
     // console.log(shareTo)
-    this.noteServcies.changColor(this.color[index], numb, 'note',shareTo);
+    this.noteServcies.changColor(this.color[index], numb, 'note', shareTo);
   }
   setFileProgress(fileProgress: boolean) {
     this.fileProgress = fileProgress;
   }
   // Open modal note edit
-  
+
   upload(event: any, id, pin) {
-    
+
     this.noteServcies.changeImgURL(event, id, pin, "note");
 
   }
@@ -111,17 +120,54 @@ export class DialogNote {
   constructor(
     public dialogRef: MatDialogRef<DialogNote>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public shareSer:SharedService) {}
+    public shareSer: SharedService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-  check(data){
-    console.log(data.id);
-  }
 
-  addToShare(data,shareTo){
-    this.shareSer.checkEmailShared(data.id,shareTo);
+
+  addToShare(data, shareTo) {
+    this.shareSer.checkEmailShared(data.id, shareTo);
     this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'dialog-content',
+  templateUrl: './dialog-content.html',
+})
+
+
+export class DialogContent {
+  public title: string = this.data.title;
+  public description = this.data.description;
+  constructor(public noteSer: NoteService
+    , public dialogRef: MatDialogRef<DialogContent>,
+    @Inject(MAT_DIALOG_DATA) public data: Note,
+    public shareSer: SharedService) {
+    // console.log(data.description);
+  }
+  public updateTitile;
+  changeTitle(value: string) {
+    this.updateTitile = value
+  }
+  public updateDescription;
+  changeDescription(value: string) {
+    this.updateDescription = value;
+  }
+  UpdateContent() {
+    if (this.updateTitile != undefined && this.updateDescription == undefined) {
+      this.noteSer.updateTitile(this.data.id, this.updateTitile, 'notes')
+      this.dialogRef.close();
+    } else if (this.updateDescription != undefined && this.updateTitile == undefined) {
+      this.noteSer.updateDescription(this.data.id, this.updateDescription, 'notes')
+      this.dialogRef.close();
+    } else if (this.updateTitile == undefined && this.updateDescription == undefined) {
+      this.dialogRef.close();
+    } else {
+      this.noteSer.updateBoth(this.data.id, this.updateTitile, this.updateDescription, 'notes')
+      this.dialogRef.close();
+    }
   }
 }
