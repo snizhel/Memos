@@ -1,12 +1,13 @@
 export const environment = {
   production: true,
+  endpoint:"http://127.0.0.1:8080/",
   firebase: {
-    apiKey: "AIzaSyAPUq073NCzk_Cw2ex0yIzNnHSyacb_5eo",
-    authDomain: "memos-a4a21.firebaseapp.com",
-    projectId: "memos-a4a21",
-    storageBucket: "memos-a4a21.appspot.com",
-    messagingSenderId: "425019375866",
-    appId: "1:425019375866:web:b15b9b8016300549998943",
-    measurementId: "G-TFK0VLYVSV"
+    apiKey: "AIzaSyCwDaRRTvpwvAgn9JGZ--QuAOv5za5FZ-A",
+    authDomain: "memos-95257.firebaseapp.com",
+    databaseURL: "https://memos-95257-default-rtdb.firebaseio.com",
+    projectId: "memos-95257",
+    storageBucket: "memos-95257.appspot.com",
+    messagingSenderId: "345662666505",
+    appId: "1:345662666505:web:6a0913fdd620ed76fc85d8"
   }
 };

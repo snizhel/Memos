@@ -86,6 +86,7 @@ export class NoteComponent implements OnInit {
   // Open modal note edit
   
   upload(event: any, id, pin) {
+    
     this.noteServcies.changeImgURL(event, id, pin, "note");
 
   }

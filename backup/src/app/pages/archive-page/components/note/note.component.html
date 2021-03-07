@@ -43,7 +43,7 @@
                                     accept="*.png.jpg" />
                                 <mat-icon>insert_photo_outlined</mat-icon>
                             </button>
-                            <button mat-menu-item class="myMenuItem myMenuItemRiple">
+                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="changeNote(note.pin,note.arhieved,note.id)">
                                 <mat-icon>replay</mat-icon>
                             </button>
                             <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(note.id)">

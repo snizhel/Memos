@@ -9,6 +9,9 @@
                 <p class="cardDescripion">{{note.description}}</p>
                 <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
                     <div class="noteMenuWrap">
+                        <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="changeNote(note.pin,note.arhieved,note.id)">
+                            <mat-icon>replay</mat-icon>
+                        </button>
                         <button style="padding: 5px 0px; width: 100%;" mat-menu-item class="myMenuItem myMenuItemRiple"
                             (click)="deleteNote(note.id)">
                             <mat-icon>delete</mat-icon>
