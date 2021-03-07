@@ -11,8 +11,9 @@
 
     <app-search-bar style="margin-left: 20%;"></app-search-bar>
     <div style="margin-left: 20%;display: flex;">
+        <div *ngIf="this.auth.user.photoURL==null"><img style="border-radius: 50%;margin-left: 5px;" src="../../../assets/user.jpg" height="50px"></div>
+        <div *ngIf="this.auth.user.photoURL"><img style="border-radius: 50%;margin-left: 5px;" src="{{this.auth.user.photoURL}}" height="50px"></div>
 
-        <img style="border-radius: 50%;margin-left: 5px;" src="{{this.auth.user.photoURL}}" height="50px">
 
 
         <mat-icon style="cursor: pointer; font-size: 35px; margin-right: 10px; margin-top: 10px; padding-left: 10px"
