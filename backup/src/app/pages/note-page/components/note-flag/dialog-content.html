@@ -1,0 +1,5 @@
+<div >
+    <input matInput type="text" value="{{title}}"  (keyup)="changeTitle(message.value)" #message><br>
+    <textarea name="paragraph_text" cols="21" rows="10" value="{{description}}" (keyup)="changeDescription(message1.value)" #message1></textarea>
+    <button (click)='UpdateContent()' >Lưu</button>
+</div>

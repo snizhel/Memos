@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Note } from '../models/note-model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestoreCollectionGroup } from "@angular/fire/firestore"
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection, AngularFirestoreCollectionGroup, validateEventsArray } from "@angular/fire/firestore"
 import { Observable } from 'rxjs';
 import { finalize, share } from "rxjs/operators";
 import { AngularFireStorage } from "@angular/fire/storage";
@@ -11,13 +11,13 @@ import { arch } from 'node:os';
   providedIn: 'root'
 })
 export class NoteService implements OnInit {
-
-  private notes: Note[];
-  private notes1: Note[];
-  private trashs: Note[];
-  private archive: Note[];
-  private flag: Note[];
-  private img: Note[];
+  public filter :Note[];
+  public notes: Note[];
+  public notes1: Note[];
+  public trashs: Note[];
+  public archive: Note[];
+  public flag: Note[];
+  public img: Note[];
   public userMail: any;
   public preUserMail: any;
 
@@ -45,7 +45,8 @@ export class NoteService implements OnInit {
 
 
   constructor(private http: HttpClient, public fire: AngularFirestore, private fireData: AngularFireStorage) {
-
+    this.filter=[];
+    this.shared = [];
     this.img = [];
     this.notes = [];
     this.notes1 = [];
@@ -154,8 +155,12 @@ export class NoteService implements OnInit {
     shared = this.fire.collection("user").doc(user1).collection("shared").valueChanges();
     shared.subscribe((data) => {
       this.shared = data;
+      return this.shared.length;
     })
   }
+
+
+
   public sharedNote: any;
   getUserNoteShared() {
     let currentUser = this.userMail;
@@ -275,6 +280,45 @@ export class NoteService implements OnInit {
     })
   }
 
+  public updateTitile(id,update,page){
+    let currentUser = this.userMail;
+    if(page=='notes'){
+      //change title in notes
+      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({title:update});
+    }else if (page=='flags'){
+      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({title:update});
+      //change title in flags
+    }else if (page=='archives'){
+      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({title:update});
+      //change title in archives
+    }
+  }
+  public updateDescription(id,update,page){
+    let currentUser = this.userMail;
+    if(page=='notes'){
+      //change Description in notes
+      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({description:update});
+    }else if (page=='flags'){
+      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({description:update});
+      //change Description in flags
+    }else if (page=='archives'){
+      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({description:update});
+      //change Description in archives
+    }
+  }
+  public updateBoth(id,title,description,page){
+    let currentUser = this.userMail;
+    if(page=='notes'){
+      //change Description in notes
+      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({title:title,description:description});
+    }else if (page=='flags'){
+      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({title:title,description:description});
+      //change Description in flags
+    }else if (page=='archives'){
+      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({title:title,description:description});
+      //change Description in archives
+    }
+  }
 
   public getArchivesData() {
     let user1 = this.userMail;
@@ -487,6 +531,30 @@ export class NoteService implements OnInit {
       }
     }
   }
+
+
+  public checkNotePageIsEmpty(){
+    if(this.notes.length==0&&this.flag.length==0&&this.shared.length==0&&this.filter.length==0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public checkArchivePageIsEmpty(){
+    if(this.archive.length==0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  public checkTrashsPageIsEmpty(){
+    if(this.trashs.length==0){
+      return true;
+    }else{
+      return false;
+    }
+  }
   public getTrashsById(id) {
     for (let i = 0; i < this.trashs.length; i++) {
       if (this.trashs[i].id == id) {
@@ -604,6 +672,37 @@ export class NoteService implements OnInit {
       // this.http.put(url, temp).toPromise();
 
       this.fire.collection("user").doc(user1).collection("notes1").doc(id.toString()).update({ imagePreview: img });
+    }
+  }
+
+  public search(value){
+    this.filter = [];
+      this.notes.filter((n)=>{
+        if(n.title.match(value)){
+          this.filter.push(n);
+        }
+      });
+      this.flag.filter((n)=>{
+        if(n.title.match(value)){
+          this.filter.push(n);
+        }
+      });
+      this.archive.filter((n)=>{
+        if(n.title.match(value)){
+          this.filter.push(n);
+        }
+      });
+      this.trashs.filter((n)=>{
+        if(n.title.match(value)){
+          this.filter.push(n);
+        }
+      });
+  }
+
+  public getFilterById(id){
+    for (let i = 0; i < this.filter.length; i++) {
+      if(this.filter[i].id==id)
+      return this.filter[i].color;
     }
   }
 

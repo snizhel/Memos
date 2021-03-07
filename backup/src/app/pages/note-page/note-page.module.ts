@@ -21,13 +21,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NewNoteComponent } from './components/new-note/new-note.component';
 import { NoteEditBodyComponent } from './components/note-edit-body/note-edit-body.component';
-import {NoteMenuComponent} from './components/note-menu/note-menu.component';
+import { NoteMenuComponent } from './components/note-menu/note-menu.component';
 import { NoteComponent } from './components/note/note.component';
 import { EditNoteModalComponent } from './components/note/edit-note-modal/edit-note-modal.component';
 import { NoteFlagComponent } from './components/note-flag/note-flag.component';
-import { NoteSharedComponent } from './components/note-shared/note-shared.component'
+import { NoteSharedComponent } from './components/note-shared/note-shared.component';
+import { NoteSearchComponent } from './components/note-search/note-search.component'
 @NgModule({
-  declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent,NoteMenuComponent, NoteComponent, EditNoteModalComponent, NoteFlagComponent, NoteSharedComponent],
+  declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent, NoteMenuComponent, NoteComponent, EditNoteModalComponent, NoteFlagComponent, NoteSharedComponent, NoteSearchComponent],
   imports: [
     CommonModule,
     MatProgressBarModule,

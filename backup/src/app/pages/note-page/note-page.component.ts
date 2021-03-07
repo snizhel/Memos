@@ -1,6 +1,7 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { AfterViewChecked, Component, DoCheck, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { NoteService } from 'src/app/services/note.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -10,11 +11,12 @@ import { SharedService } from 'src/app/services/shared.service';
   templateUrl: './note-page.component.html',
   styleUrls: ['./note-page.component.scss']
 })
-export class NotePageComponent implements OnInit,OnChanges {
+export class NotePageComponent implements OnInit, OnChanges {
 
   constructor(public noteServcies: NoteService,
-     public sharedSer: SharedService,
-     public authSer:AuthService) { }
+    public sharedSer: SharedService,
+    public authSer: AuthService,
+    private _snackBar: MatSnackBar) { }
 
   checkArrayTest() {
     console.log(this.noteServcies.id)
@@ -83,9 +85,9 @@ export class NotePageComponent implements OnInit,OnChanges {
   //   }
   //   return index;
   // }
-  ngOnChanges():void{
+  ngOnChanges(): void {
     // 
-    
+
   }
   ngOnInit(): void {
     this.noteServcies.getNotesData();
@@ -97,4 +99,21 @@ export class NotePageComponent implements OnInit,OnChanges {
     //   this.components.push(i);
     // }
   }
+
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackBarTestComponent, {
+      duration: 1 * 1000,
+      panelClass: ['white-snackbar']
+    });
+  }
+}
+
+@Component({
+  selector: 'SnackBarTest',
+  templateUrl: 'SnackBarTest.html',
+
+})
+export class SnackBarTestComponent {
+
+  
 }
