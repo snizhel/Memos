@@ -11,13 +11,14 @@ import { NoteService } from './note.service';
 export class AuthService {
   public user: firebase.default.UserInfo;
   public openNav: boolean;
+  authState: any = null;
   constructor(private auth: AngularFireAuth,private router: Router,private noteSer:NoteService) {
     this.auth.authState.subscribe((user) => {
       if (user) {
+        this.authState=user;
         this.user = user;
         this.noteSer.addUserMail(user.email);
         this.openNavBar();
-        // this.router.navigate(['archive-page']);
         this.router.navigate(['note-page']);
         
         
@@ -59,6 +60,56 @@ export class AuthService {
       // alert("login failed");
     }
   }
+
+  get isUserAnonymousLoggedIn(): boolean {
+    return (this.authState !== null) ? this.authState.isAnonymous : false
+  }
+
+  get currentUserId(): string {
+    return (this.authState !== null) ? this.authState.uid : ''
+  }
+
+  get currentUserName(): string {
+    return this.authState['email']
+  }
+
+  get currentUser(): any {
+    return (this.authState !== null) ? this.authState : null;
+  }
+
+  get isUserEmailLoggedIn(): boolean {
+    if ((this.authState !== null) && (!this.isUserAnonymousLoggedIn)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+registerWithEmail(email: string, password: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user
+      })
+      .catch(error => {
+        console.log(error)
+        throw error
+      });
+  }
+
+  
+
+  loginWithEmail(email: string, password: string)
+  {
+    return this.auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user
+      })
+      .catch(error => {
+        console.log(error)
+        throw error
+      });
+  }
+
 
   signOut() {
     try {
