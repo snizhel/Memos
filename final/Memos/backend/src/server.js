@@ -8,6 +8,7 @@ app.use(cors());
 
 const admin = require('firebase-admin');
 const serviceAccount = require('../key.json');
+const { query } = require("express");
 const databaseURL = "https://memos-95257-default-rtdb.firebaseio.com/"
 function init() {
     try {
@@ -596,6 +597,26 @@ app.post("/trashs/create", (req, res) => {
     })();
 
 })
+app.delete("/trashs/delete", (req, res) => {
+    let { user }= req.query;
+    // console.log(user);
+    (async () => {
+        try {
+            await admin.firestore().collection("user").doc(user).collection("trashs").listDocuments().then(val=>{
+                val.map((val)=>{
+                    val.delete();
+                })
+            })
+            return res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+    })();
+
+})
+
+
 app.get("/trashs", async (req, res) => {
     let test = []
     // res.send("history");
