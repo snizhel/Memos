@@ -6,19 +6,18 @@
 
                 <div class="cardInfo">
 
-                    <div (click)="openDialogContent(note)">
-                        <div class="cardImage">
-                            <img [src]="note.imagePreview">
-                        </div>
-                        <div class="fix-line-css">
-                            <h3 class="cardTitle">{{note.title}}</h3>
-                        </div>
-                        <div class="fix-line-css">
-                            <p class="cardDescripion">{{note.description}}</p>
-                        </div>
 
-
+                    <div class="cardImage">
+                        <img [src]="note.imagePreview">
                     </div>
+                    <div class="fix-line-css">
+                        <h3 class="cardTitle">{{note.title}}</h3>
+                    </div>
+                    <div class="fix-line-css">
+                        <p class="cardDescripion">{{note.description}}</p>
+                    </div>
+
+
 
 
 
@@ -26,40 +25,13 @@
 
                         <div class="noteMenuWrap">
 
-                            <button mat-menu-item class="myMenuItem myMenuItemRiple" type="button" mat-raised-button
-                                matTooltip="Đổi màu" mat-icon-button disableRipple=true, [matMenuTriggerFor]="colorMenu"
-                                (menuClosed)="setMenuStatus(false)" (menuOpened)="setMenuStatus(true)">
-                                <mat-icon class="material-icons-outlined">color_lens_outlined</mat-icon>
-                            </button>
-                            <mat-menu #colorMenu="matMenu">
-                                <div class="matMenuWrap" click-stop-propagation>
 
-                                    <div class="colorsWrap">
 
-                                        <div class="colorBtn"
-                                            *ngFor="let color of this.noteServcies.colors; let i = index;"
-                                            [ngStyle]="{'background-color':color}"
-                                            (click)="colorClick(i,note.id,note.shareTo)">
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </mat-menu>
-
-                            <button id="hide" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
-                                <input #input nv-file-select type="file" (change)="upload($event,note.id,note.pin)"
-                                    accept="*.png.jpg" />
-                                <mat-icon>insert_photo_outlined</mat-icon>
-                            </button>
-                            <button mat-menu-item class="myMenuItem myMenuItemRiple"
+                            <button matTooltip="Khôi phục" mat-menu-item class="myMenuItem myMenuItemRiple"
                                 (click)="changeNote(note.pin,note.arhieved,note.id)">
                                 <mat-icon>replay</mat-icon>
                             </button>
-                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(note.id)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
+
 
                         </div>
 

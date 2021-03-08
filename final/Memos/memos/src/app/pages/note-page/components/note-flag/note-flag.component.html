@@ -5,7 +5,7 @@
             <div class="cardInfo">
                 <div style="display: flex; justify-content: flex-end;">
                     <button style="width:auto; padding: 0 10px 0 10px;" mat-menu-item class="myMenuItemRiple"
-                        (click)="flagNote(note.id)">
+                        (click)="flagNote(note.id)" matTooltip="Bỏ ghim">
                         <!-- [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'flag')}" -->
                         <mat-icon style="margin: 0px;">bookmark_remove</mat-icon>
                     </button>
@@ -42,15 +42,15 @@
                             </div>
                         </mat-menu>
 
-                        <button id="hide" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
+                        <button matTooltip="Đăng hình" id="hide" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
                             <input #input nv-file-select type="file" (change)="upload($event,note.id,note.pin)"
                                 accept="*.png.jpg" />
                             <mat-icon>insert_photo_outlined</mat-icon>
                         </button>
-                        <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(note.id)">
+                        <button matTooltip="Lưu trữ" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(note.id)">
                             <mat-icon>archive</mat-icon>
                         </button>
-                        <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(note.id)">
+                        <button matTooltip="Xóa" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(note.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
 

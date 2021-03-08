@@ -25,6 +25,7 @@ import { SearchBarComponent } from '../app/components/search-bar/search-bar.comp
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ShareNoteDialogComponent } from './components/main-nav/share-note-dialog/share-note-dialog.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatToolbarModule,
     MatPaginatorModule,
     MatSidenavModule,
+    MatTooltipModule,
     MatListModule,
     MatIconModule,
     MatDialogModule,

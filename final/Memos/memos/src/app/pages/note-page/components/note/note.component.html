@@ -9,16 +9,20 @@
                 </div> -->
 
                 <div style="display: flex; justify-content: flex-end;">
-                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" 
-                    mat-menu-item
-                    mat-raised-button
-                    (click)="openDialog(note.id)">
+
+
+                    <div *ngIf="note.shareTo" class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" mat-menu-item
+                        mat-raised-button matTooltip="shared">
+                        <mat-icon style="margin: 0px;">folder_shared</mat-icon>
+                    </div>
+
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" mat-menu-item
+                        mat-raised-button (click)="openDialog(note.id)" matTooltip="share">
                         <mat-icon style="margin: 0px;">share</mat-icon>
                     </button>
 
-                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" 
-                    mat-menu-item 
-                    (click)="noteFlag(note.id)">
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" mat-menu-item
+                        (click)="noteFlag(note.id)" matTooltip="pin">
                         <mat-icon style="margin: 0px;">push_pin</mat-icon>
                     </button>
                 </div>
@@ -60,22 +64,22 @@
                                 <div class="colorsWrap">
                                     <div class="colorBtn" *ngFor="let color of this.noteServcies.colors; let i = index;"
                                         [ngStyle]="{'background-color':color}"
-                                        (click)="colorClick(i,note.id,note.shareTo)">
+                                        (click)="colorClick(i,note.id,note.shareTo)" >
                                     </div>
                                 </div>
                             </div>
                         </mat-menu>
 
-                        <button id="hide" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
+                        <button id="hide" matTooltip="Đăng hình" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
                             <input #input nv-file-select type="file" (change)="upload($event,note.id,note.pin)"
                                 accept="*.png.jpg" />
                             <mat-icon>insert_photo_outlined</mat-icon>
                         </button>
-                        <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(note.id)">
+                        <button mat-menu-item class="myMenuItem myMenuItemRiple" matTooltip="Lưu trữ" (click)="storeNote(note.id)">
                             <mat-icon>archive</mat-icon>
                         </button>
                         <button mat-menu-item class="myMenuItem myMenuItemRiple"
-                            (click)="deleteNote(note.id,note.shareTo)">
+                            (click)="deleteNote(note.id,note.shareTo)" matTooltip="Xóa">
                             <mat-icon>delete</mat-icon>
                         </button>
 
