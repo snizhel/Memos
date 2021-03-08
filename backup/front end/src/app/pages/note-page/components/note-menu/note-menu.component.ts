@@ -40,38 +40,67 @@ export class NoteMenuComponent implements OnInit {
     private noteService: NoteService,
     public dialog: MatDialog,
     private http: HttpClient,
-    
+    private storage: AngularFireStorage
   ) {
   }
 
   ngOnInit() { }
-
+  selectedFile: File = null;
+  fb;
+  downloadURL: Observable<string>;
   // Trình xử lý sự kiện tải lên hình ảnh
   onFileUpload(event) {
     this.selecetdFile = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.note.imagePreview = reader.result as string;
-      this.noteService.changeImg(this.note.id, "notes", this.note.imagePreview, this.note.pin);
-    };
-    let temp;
-    temp = reader.readAsDataURL(this.selecetdFile);
+    let n = this.selecetdFile.name;
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, this.selecetdFile);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
 
-  }
- 
-  upload(event: any) {
-    this.noteService.changeImgURL(event,this.note.id,this.note.pin,"note");
+              const reader = new FileReader();
+              reader.onload = () => {
+                this.note.imagePreview = this.fb;
+                // this.noteService.changeImg(this.note.id, "notes", this.note.imagePreview, this.note.pin);
+              };
+              let temp;
+              temp = reader.readAsDataURL(this.selecetdFile);
+
+
+            }
+            // console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          // console.log(url);
+        }
+      });
+
     
+
   }
 
-    // // console.log(event);
-    // this.selecetdFile = event.target.files[0];
-    // console.log(this.selecetdFile);
-    // this.uploadImage();
-    // let storageRef = firebase.storage().ref
-    // const task = storageRef.put(file);
+  upload(event: any) {
+    this.noteService.changeImgURL(event, this.note.id, this.note.pin, "note");
 
-  
+  }
+
+  // // console.log(event);
+  // this.selecetdFile = event.target.files[0];
+  // console.log(this.selecetdFile);
+  // this.uploadImage();
+  // let storageRef = firebase.storage().ref
+  // const task = storageRef.put(file);
+
+
 
   uploadImage() {
     // console.log(this.path);
