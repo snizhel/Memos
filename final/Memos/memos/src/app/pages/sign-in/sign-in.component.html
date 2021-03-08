@@ -1,6 +1,14 @@
+
+
 <div class="body">
+
     <div class="container">
-        <label for="show" class="close-btn fas fa-times" title="close"></label>
+        <!-- <label for="show" class="close-btn fas fa-times" title="close"></label> -->
+
+        <div class="logo">
+            <img [routerLink]="['']" src="../../../assets/memos-logo.png" alt="logo">
+        </div>    
+
         <div class="memoslogin" href="#" [routerLink]="['']">Login</div>
         <form (ngSubmit)="loginByEmail()">
 
