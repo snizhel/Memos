@@ -50,7 +50,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AngularFireModule.initializeApp(environment.firebase, 'Memos'),
     AngularFireAuthModule,
 
-
   ],
   providers: [],
   bootstrap: [AppComponent]

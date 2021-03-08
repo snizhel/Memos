@@ -3,14 +3,22 @@
         [ngStyle]="{'background-color':this.noteServcies.getColorById(note.id,'note',note.notes)}">
         <div class="noteItem unselectable">
             <div class="cardInfo">
+
+                <!-- <div class="tooltip">Hover over me
+                    <span class="tooltiptext">Tooltip text</span>
+                </div> -->
+
                 <div style="display: flex; justify-content: flex-end;">
-                    <button style="width:auto; padding: 0 10px 0 10px" mat-menu-item class="myMenuItemRiple" mat-raised-button
-                        (click)="openDialog(note.id)">
+                    <button style="width:auto; padding: 0 10px 0 10px" class="myMenuItemRiple"
+                    mat-menu-item
+                    mat-raised-button
+                    matTooltip="Info about the action"
+                    aria-label="Button that displays a tooltip when focused or hovered over"
+                    (click)="openDialog(note.id)">
                         <mat-icon style="margin: 0px;">share</mat-icon>
                     </button>
 
-                    <button style="width:auto; padding: 0 10px 0 10px" mat-menu-item class="myMenuItemRiple"
-                        (click)="noteFlag(note.id)">
+                    <button style="width:auto; padding: 0 10px 0 10px" mat-menu-item class="myMenuItemRiple" (click)="noteFlag(note.id)">
                         <mat-icon style="margin: 0px;">push_pin</mat-icon>
                     </button>
                 </div>
@@ -71,4 +79,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="tooltip">Hover over me
+    <span class="tooltiptext">Tooltip text</span>
 </div>
