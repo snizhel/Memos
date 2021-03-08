@@ -11,7 +11,7 @@ import { arch } from 'node:os';
   providedIn: 'root'
 })
 export class NoteService implements OnInit {
-  public filter :Note[];
+  public filter: Note[];
   public notes: Note[];
   public notes1: Note[];
   public trashs: Note[];
@@ -20,11 +20,6 @@ export class NoteService implements OnInit {
   public img: Note[];
   public userMail: any;
   public preUserMail: any;
-
-  // days = 7;
-  // date = new Date();
-  // currentDate = new Date();
-  // res = this.date.setTime(this.date.getTime() + (this.days * 24 * 60 * 60 * 1000));
 
   colors: string[] = [
     // Available menu colors
@@ -45,7 +40,7 @@ export class NoteService implements OnInit {
 
 
   constructor(private http: HttpClient, public fire: AngularFirestore, private fireData: AngularFireStorage) {
-    this.filter=[];
+    this.filter = [];
     this.shared = [];
     this.img = [];
     this.notes = [];
@@ -229,16 +224,20 @@ export class NoteService implements OnInit {
       }
     }
   }
-  public addNote(newNote: Note) {
+
+
+  public async addNote(newNote: Note) {
     let user1 = this.userMail;
     newNote.id = this.id;
     newNote.notes = true;
+    newNote.shareFrom = this.userMail;
+
     let temp = {
       email: user1
     }
     this.fire.collection("user").doc(user1).set(temp);
-    this.fire.collection("user").doc(user1).collection("notes").doc(this.id).set(newNote);
-    // this.http.post(environment.endpoint + "notes/create", newNote).toPromise();
+    // this.fire.collection("user").doc(user1).collection("notes").doc(this.id).set(newNote);
+    await this.http.post(environment.endpoint + "notes/create", newNote).toPromise();
     this.fire.collection("user").doc("id").update({ id: parseInt(this.id) + 1 })
   }
 
@@ -280,42 +279,69 @@ export class NoteService implements OnInit {
     })
   }
 
-  public updateTitile(id,update,page){
+  public async updateTitile(id, update, page) {
     let currentUser = this.userMail;
-    if(page=='notes'){
+    let temp = {
+      id:id,
+      update:update,
+      user:currentUser
+    }
+    if (page == 'notes') {
       //change title in notes
-      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({title:update});
-    }else if (page=='flags'){
-      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({title:update});
+      await this.http.put(environment.endpoint + "notes/id/update/title", temp).toPromise();
+      // this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({ title: update });
+    } else if (page == 'flags') {
+      await this.http.put(environment.endpoint + "flags/id/update/title", temp).toPromise();
+      // this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({ title: update });
       //change title in flags
-    }else if (page=='archives'){
-      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({title:update});
+    } else if (page == 'archives') {
+      await this.http.put(environment.endpoint + "archives/id/update/title", temp).toPromise();
+      // this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({ title: update });
       //change title in archives
     }
   }
-  public updateDescription(id,update,page){
+  public async updateDescription(id, update, page) {
     let currentUser = this.userMail;
-    if(page=='notes'){
+    let temp = {
+      id:id,
+      update:update,
+      user:currentUser
+    }
+    if (page == 'notes') {
       //change Description in notes
-      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({description:update});
-    }else if (page=='flags'){
-      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({description:update});
+      await this.http.put(environment.endpoint + "notes/id/update/description", temp).toPromise();
+      // this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({ description: update });
+    } else if (page == 'flags') {
+      // this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({ description: update });
+      await this.http.put(environment.endpoint + "flags/id/update/description", temp).toPromise();
       //change Description in flags
-    }else if (page=='archives'){
-      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({description:update});
+    } else if (page == 'archives') {
+      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({ description: update });
       //change Description in archives
+      await this.http.put(environment.endpoint + "archives/id/update/description", temp).toPromise();
     }
   }
-  public updateBoth(id,title,description,page){
+  public async updateBoth(id, title, description, page) {
     let currentUser = this.userMail;
-    if(page=='notes'){
+    let temp = {
+      id:id,
+      update:title,
+      update1:description,
+      user:currentUser
+    }
+    if (page == 'notes') {
       //change Description in notes
-      this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({title:title,description:description});
-    }else if (page=='flags'){
-      this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({title:title,description:description});
+
+      // console.log("update notes both");
+      await this.http.put(environment.endpoint + "notes/id/update/both", temp).toPromise();
+      // this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({ title: title, description: description });
+    } else if (page == 'flags') {
+      await this.http.put(environment.endpoint + "flags/id/update/both", temp).toPromise();
+      // this.fire.collection("user").doc(currentUser).collection("flags").doc(id).update({ title: title, description: description });
       //change Description in flags
-    }else if (page=='archives'){
-      this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({title:title,description:description});
+    } else if (page == 'archives') {
+      await this.http.put(environment.endpoint + "archives/id/update/both", temp).toPromise();
+      // this.fire.collection("user").doc(currentUser).collection("archives").doc(id).update({ title: title, description: description });
       //change Description in archives
     }
   }
@@ -342,14 +368,16 @@ export class NoteService implements OnInit {
     })
   }
 
-  public deleteInTrash(numb: String) {
+  public async deleteInTrash(numb: String) {
     let user1 = this.userMail;
     let id = numb;
-    let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}`;
-    // this.http.delete(urlDelTrashs).toPromise();
-    this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).delete();
+    let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user1}`;
+    await this.http.delete(urlDelTrashs).toPromise();
+    // this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).delete();
   }
-  public tranferToNotes(notes) {
+
+  //unness
+  public async tranferToNotes(notes) {
     let user1 = this.userMail;
     if (notes.notes == true) {
       notes.notes = false;
@@ -395,18 +423,22 @@ export class NoteService implements OnInit {
       }
     }
   }
-  addNoteToArchive(numb) {
+
+
+  async addNoteToArchive(numb) {
     let id = numb;
     let user1 = this.userMail;
-    // let urlDelNotes = `${environment.endpoint}notes/id/delete?id=${id}`;
+    let urlDelNotes = `${environment.endpoint}notes/id/delete?id=${id}&user1=${user1}`;
     for (let i = 0; i < this.notes.length; i++) {
       if (this.notes[i].id == id) {
 
-        this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).delete();
-        this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).set(this.notes[i]);
+        await this.http.post(environment.endpoint + "archives/create", this.notes[i]).toPromise();
+        await this.http.delete(urlDelNotes).toPromise();
+        // this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).delete();
+        // this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).set(this.notes[i]);
         // this.notes[i].pin = false;
-        // this.http.delete(urlDelNotes).toPromise();
-        // this.http.post(environment.endpoint + "archives/create", this.notes[i]).toPromise();
+
+
       }
     }
   }
@@ -425,28 +457,34 @@ export class NoteService implements OnInit {
     }
   }
 
-  public addFlagToNote(id) {
+  public async addFlagToNote(id) {
     let user1 = this.userMail;
     let flag: any = this.flag;
+    let urlDelFlags = `${environment.endpoint}flags/id/delete?id=${id}&user1=${user1}`;
     for (let i = 0; i < flag.length; i++) {
       if (flag[i].id == id) {
 
-
-        this.fire.collection("user").doc(user1).collection("flags").doc(flag[i].id).delete();
-        this.fire.doc(`user/${user1}/notes/${id}`).set(flag[i]);
+        await this.http.post(environment.endpoint + "notes/create", flag[i]).toPromise();
+        await this.http.delete(urlDelFlags).toPromise();
+        // this.fire.collection("user").doc(user1).collection("flags").doc(flag[i].id).delete();
+        // this.fire.doc(`user/${user1}/notes/${id}`).set(flag[i]);
       }
     }
   }
 
-  public addNoteToFlag(id) {
+  public async addNoteToFlag(id) {
     let user1 = this.userMail;
     let notes: any = this.notes;
+    let urlDelNotes = `${environment.endpoint}notes/id/delete?id=${id}&user1=${user1}`;
     for (let i = 0; i < notes.length; i++) {
       if (notes[i].id == id) {
         notes[i].pin = true;
         // console.log(notes[i])
-        this.fire.collection("user").doc(user1).collection("notes").doc(notes[i].id).delete();
-        this.fire.doc(`user/${user1}/flags/${id}`).set(notes[i]);
+
+        // this.fire.collection("user").doc(user1).collection("notes").doc(notes[i].id).delete();
+        await this.http.post(environment.endpoint + "flags/create", notes[i]).toPromise();
+        // this.fire.doc(`user/${user1}/flags/${id}`).set(notes[i]);
+        await this.http.delete(urlDelNotes).toPromise();
       }
     }
   }
@@ -464,48 +502,57 @@ export class NoteService implements OnInit {
     }
   }
 
-  addFlagToArchive(numb) {
+  async addFlagToArchive(numb) {
     let user1 = this.userMail;
     let id = numb;
-    let urlDelFlags = `${environment.endpoint}flags/id/delete?id=${id}`;
+    let urlDelFlags = `${environment.endpoint}flags/id/delete?id=${id}&user1=${user1}`;
     for (let i = 0; i < this.flag.length; i++) {
       if (this.flag[i].id == id) {
         // this.notes[i].pin = false;
         // this.http.delete(urlDelFlags).toPromise();
         // this.http.post(environment.endpoint + "archives/create", this.flag[i]).toPromise();
-        this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).delete();
-        this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).set(this.flag[i]);
+        // this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).delete();
+        // this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).set(this.flag[i]);
+        await this.http.post(environment.endpoint + "archives/create", this.flag[i]).toPromise();
+        await this.http.delete(urlDelFlags).toPromise();
       }
     }
   }
 
-  addFlagToTrash(numb) {
+  public async addFlagToTrash(numb) {
     let user1 = this.userMail;
     let id = numb;
-    let urlDelFlags = `${environment.endpoint}flags/id/delete?id=${id}`;
+    let urlDelFlags = `${environment.endpoint}flags/id/delete?id=${id}&user1=${user1}`;
     for (let i = 0; i < this.flag.length; i++) {
       if (this.flag[i].id == id) {
         // this.notes[i].pin = false;
         // this.http.delete(urlDelFlags).toPromise();
         // this.http.post(environment.endpoint + "trashs/create", this.flag[i]).toPromise();
-        this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).delete();
-        this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).set(this.flag[i]);
+        // this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).delete();
+        // this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).set(this.flag[i]);
+        await this.http.post(environment.endpoint + "trashs/create", this.flag[i]).toPromise();
+        await this.http.delete(urlDelFlags).toPromise();
+
       }
     }
   }
 
-  deleteArchiveToTrash(numb) {
+  public async deleteArchiveToTrash(numb) {
     let id = numb;
     let user1 = this.userMail;
-    let urlDelArchive = `${environment.endpoint}archives/id/delete?id=${id}`;
+    let urlDelArchive = `${environment.endpoint}archives/id/delete?id=${id}&user1=${user1}`;
     for (let i = 0; i < this.archive.length; i++) {
       if (this.archive[i].id == id) {
         this.archive[i].arhieved = true;
         // this.notes[i].pin = false;
         // this.http.delete(urlDelArchive).toPromise();
         // this.http.post(environment.endpoint + "trashs/create", this.archive[i]).toPromise();
-        this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).delete();
-        this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).set(this.archive[i]);
+        // this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).delete();
+        // this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).set(this.archive[i]);
+        await this.http.post(environment.endpoint + "trashs/create", this.archive[i]).toPromise();
+        await this.http.delete(urlDelArchive).toPromise();
+
+
       }
     }
   }
@@ -533,25 +580,25 @@ export class NoteService implements OnInit {
   }
 
 
-  public checkNotePageIsEmpty(){
-    if(this.notes.length==0&&this.flag.length==0&&this.shared.length==0&&this.filter.length==0){
+  public checkNotePageIsEmpty() {
+    if (this.notes.length == 0 && this.flag.length == 0 && this.shared.length == 0 && this.filter.length == 0) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
 
-  public checkArchivePageIsEmpty(){
-    if(this.archive.length==0){
+  public checkArchivePageIsEmpty() {
+    if (this.archive.length == 0) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
-  public checkTrashsPageIsEmpty(){
-    if(this.trashs.length==0){
+  public checkTrashsPageIsEmpty() {
+    if (this.trashs.length == 0) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
@@ -563,68 +610,83 @@ export class NoteService implements OnInit {
     }
   }
 
-  public restoreNote(pin, archive, id, page) {
+  public async restoreNote(pin, archive, id, page) {
     let user = this.userMail;
     if (page == 'archive') {
       let archiveData = this.getArchiveById(id);
       if (pin == false) {
-        this.fire.collection("user").doc(user).collection("notes").doc(id).set(archiveData);
-        this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
+        let urlDelTrashs = `${environment.endpoint}archives/id/delete?id=${id}&user1=${user}`;
+        await this.http.post(environment.endpoint + "notes/create", archiveData).toPromise();
+        await this.http.delete(urlDelTrashs).toPromise();
+        // this.fire.collection("user").doc(user).collection("notes").doc(id).set(archiveData);
+        // this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
         //restore archive to note
       } else if (pin == true) {
-        this.fire.collection("user").doc(user).collection("flags").doc(id).set(archiveData);
-        this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
+        let urlDelTrashs = `${environment.endpoint}archives/id/delete?id=${id}&user1=${user}`;
+        await this.http.post(environment.endpoint + "flags/create", archiveData).toPromise();
+        await this.http.delete(urlDelTrashs).toPromise();
+        // this.fire.collection("user").doc(user).collection("flags").doc(id).set(archiveData);
+        // this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
         //restore archive to flag
       }
     } else {
       let trashsData = this.getTrashsById(id);
       if (archive == true) {
-        this.fire.collection("user").doc(user).collection("archives").doc(id).set(trashsData);
-        this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
+        let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user}`;
+        await this.http.post(environment.endpoint + "archives/create", trashsData).toPromise();
+        await this.http.delete(urlDelTrashs).toPromise();
+        // this.fire.collection("user").doc(user).collection("archives").doc(id).set(trashsData);
+        // this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
         //restore trashs to archive
       } else if (pin == true && archive == false) {
-        this.fire.collection("user").doc(user).collection("flags").doc(id).set(trashsData);
-        this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
+        let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user}`;
+        await this.http.post(environment.endpoint + "flags/create", trashsData).toPromise();
+        await this.http.delete(urlDelTrashs).toPromise();
+        // this.fire.collection("user").doc(user).collection("flags").doc(id).set(trashsData);
+        // this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
         //restore trashs to flag
       } else if (pin == false && archive == false) {
-        this.fire.collection("user").doc(user).collection("notes").doc(id).set(trashsData);
-        this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
+        let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user}`;
+        await this.http.post(environment.endpoint + "notes/create", trashsData).toPromise();
+        await this.http.delete(urlDelTrashs).toPromise();
+        // this.fire.collection("user").doc(user).collection("notes").doc(id).set(trashsData);
+        // this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
         //restore trashs to note
       }
     }
 
   }
 
-  public changColor(color, id, page, shareTo) {
+  public async changColor(color, id, page, shareTo) {
+
     let currentUser = this.userMail;
+    let temp = {
+      id: id,
+      color: color,
+      user: currentUser
+    }
     if (shareTo == "") {
     } else {
-      this.fire.collection("user").doc(shareTo).collection("sharedNote").doc(currentUser).collection("notes").doc(id).update({ color: color })
+      // this.fire.collection("user").doc(shareTo).collection("sharedNote").doc(currentUser).collection("notes").doc(id).update({ color: color })
     }
     let user1 = this.userMail;
     switch (page) {
       case 'note': {
         let url = `${environment.endpoint}notes/id/update/color/`;
-        // this.http.put(url, temp).toPromise();
-        this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).update({ color: color });
-        break;
-      }
-      case 'note1': {
-        let url = `${environment.endpoint}notes/id/update/color/`;
-        // this.http.put(url, temp).toPromise();
-        this.fire.collection("user").doc(user1).collection("notes1").doc(id.toString()).update({ color: color });
+        await this.http.put(url, temp).toPromise();
+        // this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).update({ color: color });
         break;
       }
       case 'flag': {
         let url = `${environment.endpoint}flags/id/update/color/`;
-        // this.http.put(url, temp).toPromise();
-        this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).update({ color: color });
+        await this.http.put(url, temp).toPromise();
+        // this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).update({ color: color });
         break;
       }
       case 'archive': {
         let url = `${environment.endpoint}archives/id/update/color/`;
-        this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).update({ color: color });
-        // this.http.put(url, temp).toPromise();
+        // this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).update({ color: color });
+        await this.http.put(url, temp).toPromise();
         break;
       }
       default:
@@ -643,66 +705,61 @@ export class NoteService implements OnInit {
     return this.img[0];
   }
 
-  public changeImg(id, page, img: string, pin) {
-    let temp = {
-      "id": id,
-      "img": img,
-      "pin": pin
-    }
-    let user1 = this.userMail;
+  public async changeImg(id, page, img: string, pin) {
 
+    let user1 = this.userMail;
+    let temp = {
+      id: id,
+      img: img,
+      pin: pin,
+      user1:user1
+    }
     if (page == 'archive') {
       let url = `${environment.endpoint}archives/id/update/img/`;
-      // this.http.put(url, temp).toPromise();
-      this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).update({ imagePreview: img });
+      await this.http.put(url, temp).toPromise();
+      // this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).update({ imagePreview: img });
 
     } else if (page == 'note' && pin == false) {
       let url = `${environment.endpoint}notes/id/update/img`;
-      // console.log(temp);
-      // this.http.put(url, temp).toPromise();
-      this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).update({ imagePreview: img });
+      await this.http.put(url, temp).toPromise();
+      // this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).update({ imagePreview: img });
 
     } else if (page == 'note' && pin == true) {
       let url = `${environment.endpoint}flags/id/update/img`;
-      // this.http.put(url, temp).toPromise();
+      await this.http.put(url, temp).toPromise();
 
-      this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).update({ imagePreview: img });
-    } else if (page == 'note1') {
-      let url = `${environment.endpoint}flags/id/update/img`;
-      // this.http.put(url, temp).toPromise();
-
-      this.fire.collection("user").doc(user1).collection("notes1").doc(id.toString()).update({ imagePreview: img });
+      // this.fire.collection("user").doc(user1).collection("flags").doc(id.toString()).update({ imagePreview: img });
     }
   }
 
-  public search(value){
+  public search(value) {
     this.filter = [];
-      this.notes.filter((n)=>{
-        if(n.title.match(value)){
-          this.filter.push(n);
-        }
-      });
-      this.flag.filter((n)=>{
-        if(n.title.match(value)){
-          this.filter.push(n);
-        }
-      });
-      this.archive.filter((n)=>{
-        if(n.title.match(value)){
-          this.filter.push(n);
-        }
-      });
-      this.trashs.filter((n)=>{
-        if(n.title.match(value)){
-          this.filter.push(n);
-        }
-      });
+    this.notes.filter((n) => {
+      if (n.title.match(value)) {
+        this.filter.push(n);
+      }
+    });
+    this.flag.filter((n) => {
+      if (n.title.match(value)) {
+        this.filter.push(n);
+      }
+    });
+    this.archive.filter((n) => {
+      if (n.title.match(value)) {
+        this.filter.push(n);
+      }
+    });
+    this.trashs.filter((n) => {
+      if (n.title.match(value)) {
+        this.filter.push(n);
+      }
+    });
   }
 
-  public getFilterById(id){
+  public getFilterById(id) {
     for (let i = 0; i < this.filter.length; i++) {
-      if(this.filter[i].id==id)
-      return this.filter[i].color;
+      if (this.filter[i].id == id)
+        return this.filter[i].color;
     }
   }
 
@@ -714,7 +771,7 @@ export class NoteService implements OnInit {
     // }
   }
 
-  public deleteAll() {
+  public async deleteAll() {
     // let url = `${environment.endpoint}trash/delete/all`;
     // this.http.delete(url).toPromise();
 
@@ -722,9 +779,9 @@ export class NoteService implements OnInit {
     // this.http.delete(urlDelTrashs).toPromise();
     let user1 = this.userMail;
     for (let i = 0; i < this.trashs.length; i++) {
-      let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${this.trashs[i].id}`;
-      // this.http.delete(urlDelTrashs).toPromise();
-      this.fire.collection("user").doc(user1).collection("trashs").doc(this.trashs[i].id).delete();
+      let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${this.trashs[i].id}&user1=${user1}`;
+      await this.http.delete(urlDelTrashs).toPromise();
+      // this.fire.collection("user").doc(user1).collection("trashs").doc(this.trashs[i].id).delete();
     }
 
 

@@ -10,10 +10,16 @@
                         <div class="cardImage">
                             <img [src]="note.imagePreview">
                         </div>
-                        <h3 class="cardTitle">{{note.title}}</h3>
-                        <p class="cardDescripion">{{note.description}}</p>
+                        <div class="fix-line-css">
+                            <h3 class="cardTitle">{{note.title}}</h3>
+                        </div>
+                        <div class="fix-line-css">
+                            <p class="cardDescripion">{{note.description}}</p>
+                        </div>
+
+
                     </div>
-                    
+
 
 
                     <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
@@ -32,7 +38,8 @@
 
                                         <div class="colorBtn"
                                             *ngFor="let color of this.noteServcies.colors; let i = index;"
-                                            [ngStyle]="{'background-color':color}" (click)="colorClick(i,note.id,note.shareTo)">
+                                            [ngStyle]="{'background-color':color}"
+                                            (click)="colorClick(i,note.id,note.shareTo)">
 
                                         </div>
 
@@ -46,7 +53,8 @@
                                     accept="*.png.jpg" />
                                 <mat-icon>insert_photo_outlined</mat-icon>
                             </button>
-                            <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="changeNote(note.pin,note.arhieved,note.id)">
+                            <button mat-menu-item class="myMenuItem myMenuItemRiple"
+                                (click)="changeNote(note.pin,note.arhieved,note.id)">
                                 <mat-icon>replay</mat-icon>
                             </button>
                             <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(note.id)">
