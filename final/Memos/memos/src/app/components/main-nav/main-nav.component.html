@@ -91,11 +91,12 @@
                     (click)="changeBack()">
                     <mat-icon>settings_backup_restore</mat-icon>
                 </button> -->
-                <!-- <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
-                    >
-                    <mat-icon> folder_shared </mat-icon>
-                    <span>Email được share</span>
-                </button> -->
+
+                <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                    (click)="sharedNote()">
+                    <p  >Email được share</p>
+                </button>
+            
 
                 <div *ngFor="let shared of noteShared">
                     <button class="tenemail" (click)="getSharedNote(shared.email)">{{shared.email}}</button>

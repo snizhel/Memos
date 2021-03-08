@@ -27,6 +27,7 @@ import { EditNoteModalComponent } from './components/note/edit-note-modal/edit-n
 import { NoteFlagComponent } from './components/note-flag/note-flag.component';
 import { NoteSharedComponent } from './components/note-shared/note-shared.component';
 import { NoteSearchComponent } from './components/note-search/note-search.component'
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [NotePageComponent, NewNoteComponent, NoteEditBodyComponent, NoteMenuComponent, NoteComponent, EditNoteModalComponent, NoteFlagComponent, NoteSharedComponent, NoteSearchComponent],
   imports: [
@@ -39,6 +40,7 @@ import { NoteSearchComponent } from './components/note-search/note-search.compon
     MatDatepickerModule,
     NotePageRoutingModule,
     MatFormFieldModule,
+    MatTooltipModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
