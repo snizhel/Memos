@@ -90,12 +90,12 @@ mat-progress-bar {
     color: #80868b;
     font-size: 20px;
     font-weight: 200;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
 }
 
 .cardInfo .cardTitle {
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    font-weight: 100;
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
+    font-weight: 400;
     font-size: 20px;
     width: 100%;
     white-space: normal;
@@ -108,6 +108,9 @@ mat-progress-bar {
 }
 
 .cardInfo .cardDescripion {
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 15px;
     margin-top: 0;
     font-size: 15px;
     width: 100%;
