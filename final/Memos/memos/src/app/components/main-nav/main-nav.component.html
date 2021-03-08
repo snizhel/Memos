@@ -10,14 +10,14 @@
     </div>
 
     <app-search-bar style="margin-left: 20%;"></app-search-bar>
-    
+
 
     <div style="margin-left: 20%; display: flex;">
-        <div>
+        <!-- <div>
             <button mat-menu-item class="myMenuItemRiple" (click)="onOpenShare()">
                 <mat-icon>folder_shared</mat-icon>
             </button>
-        </div>
+        </div> -->
         <div *ngIf="this.auth.user.photoURL==null"><img style="border-radius: 50%;margin-left: 5px;"
                 src="../../../assets/user.jpg" height="50px"></div>
         <div *ngIf="this.auth.user.photoURL"><img style="border-radius: 50%;margin-left: 5px;"
@@ -72,13 +72,13 @@
             <!-- share input -->
             <form class="example-form">
 
-                <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                <!-- <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
                     (click)="check()">
                     <mat-icon>folder_shared</mat-icon>
-                </button>
+                </button> -->
                 <!-- <div *ngFor="let shared of shared">
                 </div> -->
-                <div *ngFor="let shared of shared">
+                <!-- <div *ngFor="let shared of shared">
                     <button
                         style="border:none;background-color: white;border-radius: 25px;padding: 5px;border: solid rgba(black,0.1);margin-top: 1%;margin-bottom: 1%;"
                         (click)="getShared(shared.email)">{{shared.email}}</button>
@@ -86,12 +86,12 @@
                 <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
                     (click)="changeBack()">
                     <mat-icon>settings_backup_restore</mat-icon>
-                </button>
+                </button> -->
                 <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
                     (click)="sharedNote()">
                     <mat-icon>note</mat-icon>
                 </button>
-
+            
                 <div *ngFor="let shared of noteShared">
                     <button
                         style="border:none;background-color: white;border-radius: 25px;padding: 5px;border: solid rgba(black,0.1);margin-top: 1%;margin-bottom: 1%;"

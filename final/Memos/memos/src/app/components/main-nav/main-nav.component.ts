@@ -8,11 +8,16 @@ import { NoteService } from 'src/app/services/note.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
 
 
 
 export interface DialogData {
   value: String;
+}
+
+export interface shareData {
+  email: String;
 }
 
 @Component({
@@ -30,7 +35,7 @@ export class MainNavComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
-
+    
   }
   value = 'Clear me';
   routeName: string = 'Memos';
@@ -52,6 +57,11 @@ export class MainNavComponent implements OnInit {
   sharedNote() {
 
     this.noteShared = this.noteSer.getSharedNote;
+    console.log(this.noteShared);
+    // const dialogRef = this.dialog.open(, {
+    //   width: '300px',height:'300px',
+    //   data: this.noteShared
+    // });
 
   }
   getSharedNote(email) {
@@ -79,7 +89,7 @@ export class MainNavComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    
   }
   logout() {
 
@@ -101,7 +111,7 @@ export class ShareComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, public shareSer: SharedService) {
   }
   yes(value) {
-    
+
     this.shareSer.checkEmail(value);
     this.dialog.closeAll();
   }
@@ -116,7 +126,7 @@ export class ShareComponent {
 })
 export class logout {
 
-  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<logout>, public auth: AuthService, private noteSer: NoteService,
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<logout>, public auth: AuthService, private noteSer: NoteService,
   ) { }
 
 
@@ -136,14 +146,31 @@ export class logout {
 })
 export class dialogInputshare {
 
-  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<dialogInputshare>, public auth: AuthService, private noteSer: NoteService,
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<dialogInputshare>, public auth: AuthService, private noteSer: NoteService,
   ) { }
 
-  onEnter(value:String){
+  onEnter(value: String) {
     const dialogRef = this.dialog.open(ShareComponent, {
       width: 'auto',
       data: { value: value }
     });
   }
+
+}
+
+@Component({
+  selector: 'shareNoteDialog',
+  templateUrl: 'shareNoteDialog.html',
+})
+export class shareNoteDialog {
+  public noteShared:any;
+  constructor(public dialog: MatDialog, public dialogRef: MatDialogRef<shareNoteDialog>, public auth: AuthService, private noteSer: NoteService,
+    @Inject(MAT_DIALOG_DATA) public data: shareData,
+  ) {
+    this.noteShared = data;
+    console.log(this.noteShared)
+  }
+ 
+
 
 }

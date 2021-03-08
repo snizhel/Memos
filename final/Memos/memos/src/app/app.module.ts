@@ -23,18 +23,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { SearchBarComponent } from '../app/components/search-bar/search-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ShareNoteDialogComponent } from './components/main-nav/share-note-dialog/share-note-dialog.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     MainNavComponent,
     SearchBarComponent,
+    ShareNoteDialogComponent,
 
   ],
   imports: [
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatToolbarModule,
+    MatPaginatorModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
