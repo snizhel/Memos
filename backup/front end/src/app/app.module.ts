@@ -23,19 +23,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { SearchBarComponent } from '../app/components/search-bar/search-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ShareNoteDialogComponent } from './components/main-nav/share-note-dialog/share-note-dialog.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     MainNavComponent,
     SearchBarComponent,
+    ShareNoteDialogComponent,
 
   ],
   imports: [
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatToolbarModule,
+    MatPaginatorModule,
     MatSidenavModule,
+    MatTooltipModule,
     MatListModule,
     MatIconModule,
     MatDialogModule,
@@ -49,7 +55,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'Memos'),
     AngularFireAuthModule,
-
 
   ],
   providers: [],

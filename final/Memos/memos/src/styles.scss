@@ -4,6 +4,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-drawer-inner-container::-webkit-scrollbar {
     overflow-y: hidden;
+    width: 100%;
 }
 
 .mat-typography{

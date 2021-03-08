@@ -3,15 +3,27 @@
         [ngStyle]="{'background-color':this.noteServcies.getColorById(note.id,'note',note.notes)}">
         <div class="noteItem unselectable">
             <div class="cardInfo">
-                <div style="display: flex;justify-content: flex-end;">
-                    <button style="width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple" mat-raised-button
-                        (click)="openDialog(note.id)">
-                        <mat-icon>share</mat-icon>
+
+                <!-- <div class="tooltip">Hover over me
+                    <span class="tooltiptext">Tooltip text</span>
+                </div> -->
+
+                <div style="display: flex; justify-content: flex-end;">
+
+
+                    <div *ngIf="note.shareTo" class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" mat-menu-item
+                        mat-raised-button matTooltip="shared">
+                        <mat-icon style="margin: 0px;">folder_shared</mat-icon>
+                    </div>
+
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" mat-menu-item
+                        mat-raised-button (click)="openDialog(note.id)" matTooltip="share">
+                        <mat-icon style="margin: 0px;">share</mat-icon>
                     </button>
 
-                    <button style="width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
-                        (click)="noteFlag(note.id)">
-                        <mat-icon>turned_in_not</mat-icon>
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" mat-menu-item
+                        (click)="noteFlag(note.id)" matTooltip="pin">
+                        <mat-icon style="margin: 0px;">push_pin</mat-icon>
                     </button>
                 </div>
 
@@ -28,6 +40,8 @@
                     <div class="cardImage">
                         <img [src]="note.imagePreview">
                     </div>
+
+                    <!-- NỘI DUNG NOTE -->
                     <div class="fix-line-css">
                         <h3 class="cardTitle">{{note.title}}</h3>
                     </div>
@@ -35,7 +49,7 @@
                     <div class="fix-line-css">
                         <p class="cardDescripion">{{note.description}}</p>
                     </div>
-
+                    <!-- NỘI DUNG NOTE -->
 
                 </div>
 
@@ -52,22 +66,22 @@
                                 <div class="colorsWrap">
                                     <div class="colorBtn" *ngFor="let color of this.noteServcies.colors; let i = index;"
                                         [ngStyle]="{'background-color':color}"
-                                        (click)="colorClick(i,note.id,note.shareTo)">
+                                        (click)="colorClick(i,note.id,note.shareTo)" >
                                     </div>
                                 </div>
                             </div>
                         </mat-menu>
 
-                        <button id="hide" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
+                        <button id="hide" matTooltip="Đăng hình" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
                             <input #input nv-file-select type="file" (change)="upload($event,note.id,note.pin)"
                                 accept="*.png.jpg" />
                             <mat-icon>insert_photo_outlined</mat-icon>
                         </button>
-                        <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(note.id)">
+                        <button mat-menu-item class="myMenuItem myMenuItemRiple" matTooltip="Lưu trữ" (click)="storeNote(note.id)">
                             <mat-icon>archive</mat-icon>
                         </button>
                         <button mat-menu-item class="myMenuItem myMenuItemRiple"
-                            (click)="deleteNote(note.id,note.shareTo)">
+                            (click)="deleteNote(note.id,note.shareTo)" matTooltip="Xóa">
                             <mat-icon>delete</mat-icon>
                         </button>
 
@@ -77,4 +91,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="tooltip">Hover over me
+    <span class="tooltiptext">Tooltip text</span>
 </div>

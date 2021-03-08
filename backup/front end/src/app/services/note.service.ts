@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { Note } from '../models/note-model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { finalize, share } from "rxjs/operators";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { arch } from 'node:os';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +40,7 @@ export class NoteService implements OnInit {
 
 
 
-  constructor(private http: HttpClient, public fire: AngularFirestore, private fireData: AngularFireStorage) {
+  constructor(private _snackBar: MatSnackBar,private http: HttpClient, public fire: AngularFirestore, private fireData: AngularFireStorage) {
     this.filter = [];
     this.shared = [];
     this.img = [];
@@ -372,7 +373,24 @@ export class NoteService implements OnInit {
     let id = numb;
     let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user1}`;
     await this.http.delete(urlDelTrashs).toPromise();
+    this.openSnackBarDel();
+    
     // this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).delete();
+  }
+  openSnackBarDel() {
+    this._snackBar.openFromComponent(SnackBarDel, {
+      duration: 1 * 1000,
+    });
+  }
+  openSnackBarRestore() {
+    this._snackBar.openFromComponent(SnackBarRestore, {
+      duration: 1 * 1000,
+    });
+  }
+  openSnackBarArchive() {
+    this._snackBar.openFromComponent(SnackBarArchive, {
+      duration: 1 * 1000,
+    });
   }
 
   //unness
@@ -406,6 +424,7 @@ export class NoteService implements OnInit {
         // this.http.delete(urlDelNotes).toPromise();
         this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).set(this.notes[i]);
         // this.http.post(environment.endpoint + "trashs/create", this.notes[i]).toPromise();
+        this.openSnackBarDel();
       }
     }
   }
@@ -433,6 +452,7 @@ export class NoteService implements OnInit {
 
         await this.http.post(environment.endpoint + "archives/create", this.notes[i]).toPromise();
         await this.http.delete(urlDelNotes).toPromise();
+        this.openSnackBarArchive();
         // this.fire.collection("user").doc(user1).collection("notes").doc(id.toString()).delete();
         // this.fire.collection("user").doc(user1).collection("archives").doc(id.toString()).set(this.notes[i]);
         // this.notes[i].pin = false;
@@ -531,7 +551,7 @@ export class NoteService implements OnInit {
         // this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).set(this.flag[i]);
         await this.http.post(environment.endpoint + "trashs/create", this.flag[i]).toPromise();
         await this.http.delete(urlDelFlags).toPromise();
-
+        this.openSnackBarDel();
       }
     }
   }
@@ -543,6 +563,7 @@ export class NoteService implements OnInit {
     for (let i = 0; i < this.archive.length; i++) {
       if (this.archive[i].id == id) {
         this.archive[i].arhieved = true;
+        
         // this.notes[i].pin = false;
         // this.http.delete(urlDelArchive).toPromise();
         // this.http.post(environment.endpoint + "trashs/create", this.archive[i]).toPromise();
@@ -550,7 +571,7 @@ export class NoteService implements OnInit {
         // this.fire.collection("user").doc(user1).collection("trashs").doc(id.toString()).set(this.archive[i]);
         await this.http.post(environment.endpoint + "trashs/create", this.archive[i]).toPromise();
         await this.http.delete(urlDelArchive).toPromise();
-
+        this.openSnackBarDel();
 
       }
     }
@@ -617,6 +638,7 @@ export class NoteService implements OnInit {
         let urlDelTrashs = `${environment.endpoint}archives/id/delete?id=${id}&user1=${user}`;
         await this.http.post(environment.endpoint + "notes/create", archiveData).toPromise();
         await this.http.delete(urlDelTrashs).toPromise();
+        this.openSnackBarRestore();
         // this.fire.collection("user").doc(user).collection("notes").doc(id).set(archiveData);
         // this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
         //restore archive to note
@@ -624,6 +646,7 @@ export class NoteService implements OnInit {
         let urlDelTrashs = `${environment.endpoint}archives/id/delete?id=${id}&user1=${user}`;
         await this.http.post(environment.endpoint + "flags/create", archiveData).toPromise();
         await this.http.delete(urlDelTrashs).toPromise();
+        this.openSnackBarRestore();
         // this.fire.collection("user").doc(user).collection("flags").doc(id).set(archiveData);
         // this.fire.collection("user").doc(user).collection("archives").doc(id).delete();
         //restore archive to flag
@@ -634,6 +657,7 @@ export class NoteService implements OnInit {
         let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user}`;
         await this.http.post(environment.endpoint + "archives/create", trashsData).toPromise();
         await this.http.delete(urlDelTrashs).toPromise();
+        this.openSnackBarRestore();
         // this.fire.collection("user").doc(user).collection("archives").doc(id).set(trashsData);
         // this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
         //restore trashs to archive
@@ -641,6 +665,7 @@ export class NoteService implements OnInit {
         let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user}`;
         await this.http.post(environment.endpoint + "flags/create", trashsData).toPromise();
         await this.http.delete(urlDelTrashs).toPromise();
+        this.openSnackBarRestore();
         // this.fire.collection("user").doc(user).collection("flags").doc(id).set(trashsData);
         // this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
         //restore trashs to flag
@@ -648,6 +673,7 @@ export class NoteService implements OnInit {
         let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}&user1=${user}`;
         await this.http.post(environment.endpoint + "notes/create", trashsData).toPromise();
         await this.http.delete(urlDelTrashs).toPromise();
+        this.openSnackBarRestore();
         // this.fire.collection("user").doc(user).collection("notes").doc(id).set(trashsData);
         // this.fire.collection("user").doc(user).collection("trashs").doc(id).delete();
         //restore trashs to note
@@ -831,4 +857,29 @@ export class NoteService implements OnInit {
 
 
 
+}
+
+
+@Component({
+  selector: 'SnackBarDel',
+  templateUrl: 'SnackBarDel.html',
+
+})
+export class SnackBarDel {
+}
+
+@Component({
+  selector: 'SnackBarRestore',
+  templateUrl: 'SnackBarRestore.html',
+
+})
+export class SnackBarRestore {
+}
+
+@Component({
+  selector: 'SnackBarArchive',
+  templateUrl: 'SnackBarArchive.html',
+
+})
+export class SnackBarArchive {
 }

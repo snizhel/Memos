@@ -149,7 +149,18 @@ mat-divider {
 }
 .example-form-field {
     width: 200px;
-  }
-
-  //buton
-  
+}
+.tenemail{
+    text-align: center ;
+    border:none ;
+    background-color: white; 
+    border-radius: 10px; 
+    padding: 5px; 
+    border: solid rgba(black,0.1); 
+    margin: 1px auto 1px 15px;
+}
+.tenemail:hover{
+    background-size: 140%;
+    transition-duration: 0.3s;
+    transform: scale(1.1);
+}
