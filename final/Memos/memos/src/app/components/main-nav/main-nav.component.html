@@ -9,7 +9,7 @@
         <a [routerLink]="['note-page']" class="titleName">{{routeName}}</a>
     </div>
 
-    <app-search-bar style="margin-left: 20%;"></app-search-bar>
+    <app-search-bar style="margin-left: 24%;"></app-search-bar>
 
 
     <div style="margin-left: 20%; display: flex;">
@@ -68,6 +68,10 @@
                 <mat-icon>delete_outline</mat-icon>
                 <span>Thùng rác</span>
             </a>
+            <a mat-list-item (click)="sharedNote()" routerLinkActive="is-active">
+                <mat-icon>folder_shared</mat-icon>
+                <span>Note được chia sẻ</span>
+            </a>
 
             <!-- share input -->
             <form class="example-form">
@@ -87,16 +91,14 @@
                     (click)="changeBack()">
                     <mat-icon>settings_backup_restore</mat-icon>
                 </button> -->
-                <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
-                    (click)="sharedNote()">
-                    <p>Email được share</p>
-                </button>
-            
+                <!-- <button style="margin-left: 50%;width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
+                    >
+                    <mat-icon> folder_shared </mat-icon>
+                    <span>Email được share</span>
+                </button> -->
+
                 <div *ngFor="let shared of noteShared">
-                    <button
-                        style="border:none;background-color: white;border-radius: 25px;padding: 5px;border: solid rgba(black,0.1);margin-top: 1%;margin-bottom: 1%;"
-                        (click)="getSharedNote(shared.email)">{{shared.email}}
-                    </button>
+                    <button class="tenemail" (click)="getSharedNote(shared.email)">{{shared.email}}</button>
                 </div>
 
             </form>

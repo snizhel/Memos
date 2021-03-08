@@ -150,3 +150,17 @@ mat-divider {
 .example-form-field {
     width: 200px;
 }
+.tenemail{
+    text-align: center ;
+    border:none ;
+    background-color: white; 
+    border-radius: 10px; 
+    padding: 5px; 
+    border: solid rgba(black,0.1); 
+    margin: 1px auto 1px 50px;
+}
+.tenemail:hover{
+    background-size: 150%;
+    transition-duration: 0.3s;
+    transform: scale(1.2);
+}
