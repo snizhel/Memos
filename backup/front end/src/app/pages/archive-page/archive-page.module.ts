@@ -7,6 +7,7 @@ import { NoteComponent } from './components/note/note.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatIconModule } from '@angular/material/icon'
 import { MatMenuModule } from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [ArchivePageComponent, NoteComponent],
   imports: [
@@ -14,7 +15,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ArchivePageRoutingModule,
     MatProgressBarModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule
   ]
 })
 export class ArchivePageModule { }

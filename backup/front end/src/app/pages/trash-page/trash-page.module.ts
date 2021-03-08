@@ -6,7 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { TrashPageRoutingModule } from './trash-page-routing.module';
 import { TrashPageComponent } from './trash-page.component';
 import { NoteTrashComponent } from './components/note-trash/note-trash.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import { NoteTrashComponent } from './components/note-trash/note-trash.component
     CommonModule,
     TrashPageRoutingModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class TrashPageModule { }

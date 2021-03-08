@@ -5,6 +5,7 @@ import { DialogData } from 'src/app/pages/note-page/components/note/note.compone
 import { NoteService } from 'src/app/services/note.service';
 import { TrashPageComponent } from '../../trash-page.component';
 
+
 @Component({
   selector: 'app-note-trash',
   templateUrl: './note-trash.component.html',
