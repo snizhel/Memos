@@ -9,16 +9,16 @@
                 </div> -->
 
                 <div style="display: flex; justify-content: flex-end;">
-                    <button style="width:auto; padding: 0 10px 0 10px" class="myMenuItemRiple"
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" 
                     mat-menu-item
                     mat-raised-button
-                    matTooltip="Info about the action"
-                    aria-label="Button that displays a tooltip when focused or hovered over"
                     (click)="openDialog(note.id)">
                         <mat-icon style="margin: 0px;">share</mat-icon>
                     </button>
 
-                    <button style="width:auto; padding: 0 10px 0 10px" mat-menu-item class="myMenuItemRiple" (click)="noteFlag(note.id)">
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" 
+                    mat-menu-item 
+                    (click)="noteFlag(note.id)">
                         <mat-icon style="margin: 0px;">push_pin</mat-icon>
                     </button>
                 </div>

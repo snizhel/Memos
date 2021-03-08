@@ -169,12 +169,8 @@ export class DialogContent {
       this.dialogRef.close();
     }
   }
-<<<<<<< HEAD:Memos/src/app/pages/note-page/components/note/note.component.ts
-}
-=======
 
   check(){
     console.log(this.updateTitile,this.updateDescription)
   }
 }
->>>>>>> c89c06442890479f0f776606fee4e2f28f652574:final/Memos/memos/src/app/pages/note-page/components/note/note.component.ts
