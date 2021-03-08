@@ -103,6 +103,7 @@ export class SharedService {
     temp.subscribe(data => {
       this.NoteSharedData = data;
       this.NoteSharedDataLength = data.length;
+      console.log(this.NoteSharedData);
 
     })
     // console.log(temp);

@@ -42,6 +42,12 @@ export class MainNavComponent implements OnInit {
     });
 
   }
+  onOpenShare() {
+    const dialogRef = this.dialog.open(dialogInputshare, {
+      width: 'auto'
+    });
+
+  }
   public noteShared: Array<any>;
   sharedNote() {
 
@@ -95,11 +101,12 @@ export class ShareComponent {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, public shareSer: SharedService) {
   }
   yes(value) {
+    
     this.shareSer.checkEmail(value);
-    this.dialogRef.close();
+    this.dialog.closeAll();
   }
   no() {
-    this.dialogRef.close();
+    this.dialog.closeAll();
   }
 }
 
@@ -109,7 +116,7 @@ export class ShareComponent {
 })
 export class logout {
 
-  constructor(public dialogRef: MatDialogRef<logout>, public auth: AuthService, private noteSer: NoteService,
+  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<logout>, public auth: AuthService, private noteSer: NoteService,
   ) { }
 
 
@@ -121,4 +128,22 @@ export class logout {
   no() {
     this.dialogRef.close();
   }
+}
+
+@Component({
+  selector: 'dialogInputshare',
+  templateUrl: 'dialogInputshare.html',
+})
+export class dialogInputshare {
+
+  constructor(public dialog: MatDialog,public dialogRef: MatDialogRef<dialogInputshare>, public auth: AuthService, private noteSer: NoteService,
+  ) { }
+
+  onEnter(value:String){
+    const dialogRef = this.dialog.open(ShareComponent, {
+      width: 'auto',
+      data: { value: value }
+    });
+  }
+
 }
