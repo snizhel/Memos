@@ -10,24 +10,14 @@
     </div>
 
     <app-search-bar style="margin-left: 20%;"></app-search-bar>
-    <div style="margin-left: 24%;display: flex;">
+
+    <div style="margin-left: 24%; display: flex;">
         <div *ngIf="this.auth.user.photoURL==null"><img style="border-radius: 50%;margin-left: 5px;" src="../../../assets/user.jpg" height="50px"></div>
         <div *ngIf="this.auth.user.photoURL"><img style="border-radius: 50%;margin-left: 5px;" src="{{this.auth.user.photoURL}}" height="50px"></div>
 
-
-
         <mat-icon style="cursor: pointer; font-size: 35px; margin-right: 10px; margin-top: 10px; padding-left: 10px"
-            (click)="logout()">
-            logout</mat-icon>
-        <!-- <img src="{{this.user.avatar}}" alt=""> -->
-
+        (click)="logout()">logout</mat-icon>
     </div>
-
-
-
-
-
-
 </mat-toolbar>
 
 
@@ -43,7 +33,7 @@
 
             <a mat-list-item [routerLink]="['/note-page']" routerLinkActive="is-active">
                 <mat-icon class="material-icons-outlined">emoji_objects</mat-icon>
-                <span>Note</span>
+                <span>Ghi chú</span>
             </a>
 
             <!-- <a mat-list-item routerLink="/alerts" routerLinkActive="is-active">
@@ -63,12 +53,12 @@
 
             <a mat-list-item routerLink="/archive-page" routerLinkActive="is-active">
                 <mat-icon class="material-icons-outlined">archive</mat-icon>
-                <span>Archive</span>
+                <span>Lưu trữ</span>
             </a>
 
             <a mat-list-item routerLink="/trash-page" routerLinkActive="is-active">
                 <mat-icon>delete_outline</mat-icon>
-                <span>Trash</span>
+                <span>Thùng rác</span>
             </a>
 
             <!-- share input -->
@@ -114,12 +104,7 @@
 
             <!-- Content -->
 
-
-
-
-
             <div class="mat-sidenav-footer"></div>
         </mat-sidenav-content>
 
     </mat-sidenav>
-    <h1>asdasd</h1>
