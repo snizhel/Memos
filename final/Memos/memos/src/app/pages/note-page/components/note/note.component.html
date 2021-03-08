@@ -3,15 +3,23 @@
         [ngStyle]="{'background-color':this.noteServcies.getColorById(note.id,'note',note.notes)}">
         <div class="noteItem unselectable">
             <div class="cardInfo">
-                <div style="display: flex;justify-content: flex-end;">
-                    <button style="width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple" mat-raised-button
-                        (click)="openDialog(note.id)">
-                        <mat-icon>share</mat-icon>
+
+                <!-- <div class="tooltip">Hover over me
+                    <span class="tooltiptext">Tooltip text</span>
+                </div> -->
+
+                <div style="display: flex; justify-content: flex-end;">
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" 
+                    mat-menu-item
+                    mat-raised-button
+                    (click)="openDialog(note.id)">
+                        <mat-icon style="margin: 0px;">share</mat-icon>
                     </button>
 
-                    <button style="width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
-                        (click)="noteFlag(note.id)">
-                        <mat-icon>turned_in_not</mat-icon>
+                    <button class="myMenuItemRiple" style="width:auto; padding: 0 10px 0 10px" 
+                    mat-menu-item 
+                    (click)="noteFlag(note.id)">
+                        <mat-icon style="margin: 0px;">push_pin</mat-icon>
                     </button>
                 </div>
 
@@ -77,4 +85,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="tooltip">Hover over me
+    <span class="tooltiptext">Tooltip text</span>
 </div>

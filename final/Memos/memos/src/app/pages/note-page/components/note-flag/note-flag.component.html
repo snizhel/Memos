@@ -1,15 +1,16 @@
-
-
 <div class="item" style="float: left;">
     <div class="item-content" [ngStyle]="{'background-color':this.noteServcies.getColorById(note.id,'flag',note.pin)}">
         <div class="noteItem unselectable">
 
             <div class="cardInfo">
-                <button style="margin-left: 165px; width:auto; padding: 0px;" mat-menu-item class="myMenuItemRiple"
-                    (click)="flagNote(note.id)">
-                    <!-- [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'flag')}" -->
-                    <mat-icon>turned_in</mat-icon>
-                </button>
+                <div style="display: flex; justify-content: flex-end;">
+                    <button style="width:auto; padding: 0 10px 0 10px;" mat-menu-item class="myMenuItemRiple"
+                        (click)="flagNote(note.id)">
+                        <!-- [ngStyle]="{'background-color':this.noteServcies.getColorByNum(j+1,'flag')}" -->
+                        <mat-icon style="margin: 0px;">bookmark_remove</mat-icon>
+                    </button>
+                </div>
+
                 <div (click)="openDialogContent(note)">
                     <div class="cardImage">
                         <img [src]="note.imagePreview">
@@ -22,7 +23,6 @@
                     </div>
                     
                 </div>
-                
 
                 <div class="cardFooter" [ngClass]="{menuActive:menuActiveTrigger}">
                     <div class="noteMenuWrap">
@@ -43,7 +43,8 @@
                         </mat-menu>
 
                         <button id="hide" mat-menu-item class="myMenuItem myMenuItemRiple" (click)="input.click()">
-                            <input #input nv-file-select type="file" (change)="upload($event,note.id,note.pin)" accept="*.png.jpg" />
+                            <input #input nv-file-select type="file" (change)="upload($event,note.id,note.pin)"
+                                accept="*.png.jpg" />
                             <mat-icon>insert_photo_outlined</mat-icon>
                         </button>
                         <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="storeNote(note.id)">
@@ -52,7 +53,7 @@
                         <button mat-menu-item class="myMenuItem myMenuItemRiple" (click)="deleteNote(note.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
-                        
+
                     </div>
                 </div>
             </div>

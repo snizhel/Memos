@@ -115,4 +115,10 @@ button {
   margin: 50px 5px 0;
   border: none;
   cursor: pointer;
+  transition: 0.8s ease;
+}
+button:hover {
+  background: black;
+  color:#fff200;
+  transition: 0.8s ease;
 }

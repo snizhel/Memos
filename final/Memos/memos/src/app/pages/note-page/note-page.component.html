@@ -26,31 +26,26 @@
         Pizza party
     </button> -->
     <div *ngIf="this.noteServcies.flag.length>0">
-        <h1>Ghim</h1>
+        <span class="ghimvakhac">Được ghim</span>
         <div class="grid" style="display: flex;" #gridLayout>
-            <div>
-                <div class="item-content">
-                    <div>
-                        <app-note-flag [note]=note *ngFor="let note of noteServcies.getFlag"></app-note-flag>
-                    </div>
+            <div class="item-content" style="margin-top: 1%;">
+                <div>
+                    <app-note-flag [note]=note *ngFor="let note of noteServcies.getFlag"></app-note-flag>
                 </div>
             </div>
         </div>
     </div>
 
-
-
     <div *ngIf="this.noteServcies.notes.length>0">
-        <h1>Khác</h1>
+        <span class="ghimvakhac">Khác</span>
         <div class="grid" style="display: flex;" #gridLayout>
-            <div class="item-content">
+            <div class="item-content" style="margin-top: 1%;">
                 <div>
                     <app-note [note]=note *ngFor="let note of noteServcies.getNotes"></app-note>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div *ngIf="this.noteServcies.shared>0">
         <h1>Share Note</h1>
