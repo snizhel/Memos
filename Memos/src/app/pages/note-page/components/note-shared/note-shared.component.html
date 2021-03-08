@@ -1,16 +1,21 @@
 <div class="item" style="float: left;">
-    <div class="item-content"
-    [ngStyle]="{'background-color':this.shareSer.getColorById(note.id,'note')}">
+    <div class="item-content" [ngStyle]="{'background-color':this.shareSer.getColorById(note.id,'note')}">
 
         <div class="noteItem unselectable">
             <div class="cardInfo">
-        
+
 
                 <div class="cardImage">
                     <img [src]="note.imagePreview">
                 </div>
-                <h3 class="cardTitle">{{note.title}}</h3>
-                <p class="cardDescripion">{{note.description}}</p>
+                <div class="fix-line-css">
+                    <h3 class="cardTitle">{{note.title}}</h3>
+                </div>
+                <div class="fix-line-css">
+                    <p class="cardDescripion">{{note.description}}</p>
+                </div>
+
+
                 <div class="cardFooter">
                     <div class="noteMenuWrap">
 
@@ -24,7 +29,8 @@
                             <div class="matMenuWrap" click-stop-propagation>
                                 <div class="colorsWrap">
                                     <div class="colorBtn" *ngFor="let color of this.noteServcies.colors; let i = index;"
-                                        [ngStyle]="{'background-color':color}" (click)="colorClick(i,note.id,note.shareFrom,note.shareTo)">
+                                        [ngStyle]="{'background-color':color}"
+                                        (click)="colorClick(i,note.id,note.shareFrom,note.shareTo)">
                                     </div>
                                 </div>
                             </div>
