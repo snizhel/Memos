@@ -157,17 +157,24 @@ export class DialogContent {
     this.updateDescription = value;
   }
   UpdateContent() {
-    if (this.updateTitile != undefined && this.updateDescription == undefined) {
+    if (this.updateTitile != undefined &&this.updateDescription==undefined) {
+      console.log("update title")
       this.noteSer.updateTitile(this.data.id, this.updateTitile, 'notes')
       this.dialogRef.close();
-    } else if (this.updateDescription != undefined && this.updateTitile == undefined) {
+    } else if (this.updateDescription != undefined &&this.updateTitile==undefined) {
+      console.log("update descript")
       this.noteSer.updateDescription(this.data.id, this.updateDescription, 'notes')
       this.dialogRef.close();
     } else if (this.updateTitile == undefined && this.updateDescription == undefined) {
       this.dialogRef.close();
-    } else {
+    } else{
+      console.log('update both');
       this.noteSer.updateBoth(this.data.id, this.updateTitile, this.updateDescription, 'notes')
       this.dialogRef.close();
     }
+  }
+
+  check(){
+    console.log(this.updateTitile,this.updateDescription)
   }
 }
