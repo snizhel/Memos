@@ -76,8 +76,10 @@ export class MainNavComponent implements OnInit {
 
   }
   logout() {
-    this.auth.signOut();
-    this.noteSer.deleteUserMail();
+
+    this.dialog.open(logout);
+
+
   }
 
 }
@@ -95,6 +97,26 @@ export class ShareComponent {
   yes(value) {
     this.shareSer.checkEmail(value);
     this.dialogRef.close();
+  }
+  no() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'logout',
+  templateUrl: 'logout.html',
+})
+export class logout {
+
+  constructor(public dialogRef: MatDialogRef<logout>, public auth: AuthService, private noteSer: NoteService,
+  ) { }
+
+
+  yes() {
+    this.dialogRef.close();
+    this.auth.signOut();
+    this.noteSer.deleteUserMail();
   }
   no() {
     this.dialogRef.close();
