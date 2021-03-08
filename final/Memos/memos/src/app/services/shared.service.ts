@@ -61,7 +61,7 @@ export class SharedService {
     }
 
   }
-  checkEmailShared(id,email) {
+  checkEmailShared(id, email) {
     let page = "note";
     let currentUser = this.noteSer.getUserMail;
     let sharedUser = email;
@@ -79,49 +79,54 @@ export class SharedService {
           // console.log(data);
           let dataNote = this.noteSer.getNote(id)
           // console.log(dataNote);
-          if(page == "note"){
+          if (page == "note") {
             dataNote.shareFrom = currentUser;
             dataNote.shareTo = sharedUser;
           }
-          this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({shareTo:sharedUser,shareFrom:currentUser});
+          this.fire.collection("user").doc(currentUser).collection("notes").doc(id).update({ shareTo: sharedUser, shareFrom: currentUser });
 
           this.fire.collection("user").doc(sharedUser).collection("sharedNote").doc(currentUser).collection("notes").doc(dataNote.id).set(dataNote);
-          this.fire.collection("user").doc(sharedUser).collection("sharedNote").doc(currentUser).set({email:currentUser});
+          this.fire.collection("user").doc(sharedUser).collection("sharedNote").doc(currentUser).set({ email: currentUser });
         }
       });
     }
 
   }
 
-  public NoteSharedData:any;
-  addNoteShared(email){
+  public NoteSharedData: any;
+  public NoteSharedDataLength: any;
+  addNoteShared(email) {
     let currentUser = this.noteSer.getUserMail;
     let sharedUser = email;
-    let temp :Observable<any>
-    temp =this.fire.collection("user").doc(currentUser).collection("sharedNote").doc(sharedUser).collection("notes").valueChanges();
-    temp.subscribe(data=>{
-      this.NoteSharedData=data;
-      
+    let temp: Observable<any>
+    temp = this.fire.collection("user").doc(currentUser).collection("sharedNote").doc(sharedUser).collection("notes").valueChanges();
+    temp.subscribe(data => {
+      this.NoteSharedData = data;
+      this.NoteSharedDataLength = data.length;
+
     })
     // console.log(temp);
   }
 
-  getColorById(id,page){
+
+  
+
+  getColorById(id, page) {
     for (let i = 0; i < this.NoteSharedData.length; i++) {
-      if(this.NoteSharedData[i].id == id){
+      if (this.NoteSharedData[i].id == id) {
         return this.NoteSharedData[i].color;
       }
-      
+
     }
   }
-  get getNoteSharedData(){
+  get getNoteSharedData() {
     return this.NoteSharedData;
   }
-  changColorById(i,id,shareFrom,shareTo){
+  changColorById(i, id, shareFrom, shareTo) {
     let currentUser = this.noteSer.getUserMail;
     let sharedUser = shareFrom;
-    this.fire.collection("user").doc(sharedUser).collection("notes").doc(id).update({color:this.colors[i]})
-    this.fire.collection("user").doc(currentUser).collection("sharedNote").doc(sharedUser).collection("notes").doc(id).update({color:this.colors[i]})
+    this.fire.collection("user").doc(sharedUser).collection("notes").doc(id).update({ color: this.colors[i] })
+    this.fire.collection("user").doc(currentUser).collection("sharedNote").doc(sharedUser).collection("notes").doc(id).update({ color: this.colors[i] })
   }
 
 }
