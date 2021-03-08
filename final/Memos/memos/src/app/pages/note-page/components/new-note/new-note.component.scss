@@ -71,3 +71,7 @@
     background-color: #ececed;
   }
   
+  //input
+#hide input[type="file"] {
+  display: none;
+}

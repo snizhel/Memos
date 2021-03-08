@@ -126,7 +126,8 @@ export class NewNoteComponent implements OnInit {
   }
 
   upload(event: any) {
-    this.noteService.changeImgURL(event,this.note.id,this.note.pin,"note");
+    console.log(event);
+    // this.noteService.changeImgURL(event,this.note.id,this.note.pin,"note");
     
   }
 

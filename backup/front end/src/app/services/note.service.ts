@@ -91,6 +91,7 @@ export class NoteService implements OnInit {
     let filePath = `RoomsImages/${n}`;
     let fileRef = this.fireData.ref(filePath);
     let task = this.fireData.upload(`RoomsImages/${n}`, file);
+    console.log(task);
     task
       .snapshotChanges()
       .pipe(
@@ -117,8 +118,6 @@ export class NoteService implements OnInit {
   addUserMail(email) {
     this.userMail = email;
     this.preUserMail = email;
-
-
     this.getUserShared();
     this.getData();
   }
@@ -772,21 +771,9 @@ export class NoteService implements OnInit {
   }
 
   public async deleteAll() {
-    // let url = `${environment.endpoint}trash/delete/all`;
-    // this.http.delete(url).toPromise();
-
-    // let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${id}`;
-    // this.http.delete(urlDelTrashs).toPromise();
-    let user1 = this.userMail;
-    for (let i = 0; i < this.trashs.length; i++) {
-      let urlDelTrashs = `${environment.endpoint}trashs/id/delete?id=${this.trashs[i].id}&user1=${user1}`;
+      let user = this.userMail;
+      let urlDelTrashs = `${environment.endpoint}trashs/delete?user=${user}`;
       await this.http.delete(urlDelTrashs).toPromise();
-      // this.fire.collection("user").doc(user1).collection("trashs").doc(this.trashs[i].id).delete();
-    }
-
-
-    // let data: any;
-    // this.http.delete(urlDelTrashs).toPromise();
   }
 
   public getColorById(id, page: string, notes) {

@@ -110,7 +110,15 @@ registerWithEmail(email: string, password: string) {
       });
   }
 
-
+  resetPassword(email: string) {
+    return this.auth.sendPasswordResetEmail(email)
+      .then(() => console.log('sent Password Reset Email!'))
+      .catch((error) => {
+        console.log(error)
+        throw error
+      })
+  }
+  
   signOut() {
     try {
       this.noteSer.deleteUserMail();

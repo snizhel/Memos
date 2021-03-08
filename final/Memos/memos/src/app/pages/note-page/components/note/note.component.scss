@@ -4,6 +4,10 @@
     min-height: 100px;
 }
 
+.ok {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
 .noteItem {
     transition: 0.2s;
     width: 240px;
