@@ -28,7 +28,7 @@
     <div *ngIf="this.noteServcies.flag.length>0">
         <span class="ghimvakhac">Được ghim</span>
         <div class="grid" style="display: flex;" #gridLayout>
-            <div class="item-content" style="margin-top: 1%;">
+            <div class="item-content" style="margin-top: 2%;">
                 <div>
                     <app-note-flag [note]=note *ngFor="let note of noteServcies.getFlag"></app-note-flag>
                 </div>
@@ -39,7 +39,7 @@
     <div *ngIf="this.noteServcies.notes.length>0">
         <span class="ghimvakhac">Khác</span>
         <div class="grid" style="display: flex;" #gridLayout>
-            <div class="item-content" style="margin-top: 1%;">
+            <div class="item-content" style="margin-top: 2%;">
                 <div>
                     <app-note [note]=note *ngFor="let note of noteServcies.getNotes"></app-note>
                 </div>
@@ -48,9 +48,9 @@
     </div>
 
     <div *ngIf="this.sharedSer.NoteSharedDataLength>0">
-        <span >Note được share</span>
+        <span class="ghimvakhac">Được chia sẻ với tôi</span>
         <div class="grid" style="display: flex;" #gridLayout>
-            <div class="item-content">
+            <div class="item-content" style="margin-top: 2%;">
                 <div>
                     <app-note-shared [note]=note *ngFor="let note of sharedSer.getNoteSharedData"></app-note-shared>
                 </div>
