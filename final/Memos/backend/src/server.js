@@ -180,7 +180,6 @@ app.put("/shared/id/update/img", (req, res) => {
         try {
             await admin.firestore().collection("user").doc(shareFrom).collection("notes").doc(id.toString()).update({ imagePreview: img });
             await admin.firestore().collection("user").doc(shareTo).collection("sharedNote").doc(shareFrom).collection("notes").doc(id).update({imagePreview: img})
-            
             return res.status(200).send();
         } catch (error) {
             console.log(error);
