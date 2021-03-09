@@ -129,7 +129,7 @@ export class DialogNote {
 
   addToShare(data, shareTo) {
     this.shareSer.checkEmailShared(data.id, shareTo);
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 }
 
